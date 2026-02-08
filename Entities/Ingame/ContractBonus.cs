@@ -9,10 +9,10 @@ namespace FMScoutFramework.Core.Entities.InGame
 {
 	public class ContractBonus : BaseObject, IContractBonus
     {
-		public ContractBonus (int memoryAddress, IVersion version) 
+		public ContractBonus (Int64 memoryAddress, IVersion version) 
 			: base(memoryAddress, version)
 		{	}
-		public ContractBonus (int memoryAddress, ArraySegment<byte> originalBytes, IVersion version) 
+		public ContractBonus (Int64 memoryAddress, ArraySegment<byte> originalBytes, IVersion version) 
 			: base(memoryAddress, originalBytes, version)
 		{	}
 

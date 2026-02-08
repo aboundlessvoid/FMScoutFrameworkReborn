@@ -10,22 +10,22 @@ namespace FMScoutFramework.Core.Entities.InGame
     public class RivalNation : BaseObject, IRivalNation
     {
         public RivalNationOffsets RivalNationOffsets;
-        public RivalNation (int memoryAddress, IVersion version)
+        public RivalNation (Int64 memoryAddress, IVersion version)
             : base(memoryAddress, version) 
         {
                 this.RivalNationOffsets = new RivalNationOffsets(version);
         }
-        public RivalNation(int memoryAddress, ArraySegment<byte>originalBytes, IVersion version)
+        public RivalNation(Int64 memoryAddress, ArraySegment<byte>originalBytes, IVersion version)
             : base(memoryAddress, originalBytes, version)
         {
             this.RivalNationOffsets = new RivalNationOffsets(version);
         }
 
-        private int RivalNationAddress
+        private Int64 RivalNationAddress
         {
             get
             {
-                return PropertyInvoker.Get<Int32>(RivalNationOffsets.NationAddress, OriginalBytes, MemoryAddress, DatabaseMode);
+                return PropertyInvoker.Get<Int64>(RivalNationOffsets.NationAddress, OriginalBytes, MemoryAddress, DatabaseMode);
             }
         }
 

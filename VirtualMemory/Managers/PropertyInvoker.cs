@@ -8,12 +8,12 @@ namespace FMScoutFramework.Core.Managers
 {
 	internal static class PropertyInvoker
 	{
-		public static T Get<T>(int offset, ArraySegment<byte> baseObject, int memoryAddress, DatabaseModeEnum databaseMode)
+		public static T Get<T>(int offset, ArraySegment<byte> baseObject, Int64 memoryAddress, DatabaseModeEnum databaseMode)
 		{
 			if (databaseMode == DatabaseModeEnum.Cached)
 				return (T)ProcessManager.ReadFromBuffer (baseObject.Array, baseObject.Offset + offset, typeof(T));
 			else { // realtime
-				int offsetToFind = memoryAddress + offset;
+                Int64 offsetToFind = memoryAddress + offset;
 
 				if (typeof(Int16) == typeof(T))
 					return (T)(object)ProcessManager.ReadInt16 (offsetToFind);
@@ -36,7 +36,7 @@ namespace FMScoutFramework.Core.Managers
 			}
 		}
 
-        public static void Set<T>(int offset, ArraySegment<byte> baseObject, int memoryAddress, DatabaseModeEnum databaseMode, T value)
+        public static void Set<T>(int offset, ArraySegment<byte> baseObject, Int64 memoryAddress, DatabaseModeEnum databaseMode, T value)
         {
             if (databaseMode == DatabaseModeEnum.Cached)
             {
@@ -44,7 +44,7 @@ namespace FMScoutFramework.Core.Managers
             }
             else
             {
-                int offsetToFind = memoryAddress + offset;
+                Int64 offsetToFind = memoryAddress + offset;
 
                 if (typeof(Int16) == typeof(T))
                     ProcessManager.WriteInt16((short)(object)value, offsetToFind);
@@ -66,37 +66,43 @@ namespace FMScoutFramework.Core.Managers
         }
 
 
-        public static string GetString(int offset, int additionalStringOffset, ArraySegment<byte> baseObject, int memoryAddress, DatabaseModeEnum databaseMode)
+        public static string GetString(int offset, int additionalStringOffset, ArraySegment<byte> baseObject, Int64 memoryAddress, DatabaseModeEnum databaseMode)
 		{
 			if (databaseMode == DatabaseModeEnum.Cached)
-				return ProcessManager.ReadString (baseObject, offset, additionalStringOffset);
+				return ProcessManager.ReadString(baseObject, offset, additionalStringOffset);
 			else // realtime
-				return ProcessManager.ReadString (memoryAddress + offset, additionalStringOffset);
+				return ProcessManager.ReadString(memoryAddress + offset, additionalStringOffset);
 		}
 
-		private static Dictionary<Type, Func<int, IVersion, object>> pointerDelegateDictionary = new Dictionary<Type, Func<int, IVersion, object>>();
-		public static T GetPointer<T>(int offset, ArraySegment<byte> baseObject, int memoryAddress, DatabaseModeEnum databaseMode, IVersion version)
+		public static string GetHexColorValue(int offset, ArraySegment<byte> baseObject, Int64 memoryAddress, DatabaseModeEnum databaseMode)
+		{
+			UInt32 rgba = Get<UInt32>(offset, baseObject, memoryAddress, databaseMode);
+            return rgba.ToString("X");
+        }
+
+        private static Dictionary<Type, Func<Int64, IVersion, object>> pointerDelegateDictionary = new Dictionary<Type, Func<Int64, IVersion, object>>();
+		public static T GetPointer<T>(int offset, ArraySegment<byte> baseObject, Int64 memoryAddress, DatabaseModeEnum databaseMode, IVersion version)
 			where T: class
 		{
 			if (databaseMode == DatabaseModeEnum.Cached) {
-				int memAddress = ProcessManager.ReadInt32 (baseObject.Array, offset + baseObject.Offset);
-				var objectStore = ((Dictionary<int, T>)ObjectManagerWrapper.ObjectManagers [databaseMode].ObjectStore [typeof(T)]);
+                Int64 memAddress = ProcessManager.ReadInt64 (baseObject.Array, offset + baseObject.Offset);
+				var objectStore = ((Dictionary<Int64, T>)ObjectManagerWrapper.ObjectManagers [databaseMode].ObjectStore [typeof(T)]);
 				if (objectStore.ContainsKey (memAddress))
 					return objectStore [memAddress] as T;
 				else
 					return default(T);
 			} else {
-				int memAddress = memoryAddress + offset;
+                Int64 memAddress = memoryAddress + offset;
 
 				/*
 				if (typeof(T) == typeof(Contract))
-					memAddress = ProcessManager.ReadInt32 (memAddress); */
+					memAddress = ProcessManager.ReadInt64 (memAddress); */
 
 				if (!pointerDelegateDictionary.ContainsKey (typeof(T))) {
 					System.Reflection.ConstructorInfo ci =
-						typeof(T).GetConstructor (new[] { typeof(int), typeof(IVersion) });
+						typeof(T).GetConstructor (new[] { typeof(Int64), typeof(IVersion) });
 
-					ParameterExpression memAddressParam = Expression.Parameter (typeof(int), "memAdd");
+					ParameterExpression memAddressParam = Expression.Parameter (typeof(Int64), "memAdd");
 					ParameterExpression versionParam = Expression.Parameter (typeof(IVersion), "version");
 
 					LambdaExpression lambda = Expression.Lambda (
@@ -106,11 +112,11 @@ namespace FMScoutFramework.Core.Managers
 					lock (pointerDelegateLock) {
 						if (!pointerDelegateDictionary.ContainsKey (typeof(T))) {
 							pointerDelegateDictionary.Add (typeof(T),
-								(Func<int, IVersion, object>)lambda.Compile ());
+								(Func<Int64, IVersion, object>)lambda.Compile ());
 						}
 					}
 				}
-				return (T)pointerDelegateDictionary [typeof(T)].Invoke (ProcessManager.ReadInt32 (memAddress), version);
+				return (T)pointerDelegateDictionary [typeof(T)].Invoke (ProcessManager.ReadInt64 (memAddress), version);
 			}
 		}
 

@@ -7,11 +7,11 @@ namespace FMScoutFramework.Core.Entities.GameVersions
 {
 	public interface IPersonVersionOffsets
 	{
-		int Person { get; }
-		int Player { get; }
-		int Staff { get; }
-		int HumanManager { get; }
-		int PlayerStaff { get; }
-		int Official { get; }
+        int Person { get; }
+        int Player { get; }
+        int Staff { get; }
+        int HumanManager { get; }
+        int PlayerStaff { get; }
+        int Official { get; }
 	}
 }

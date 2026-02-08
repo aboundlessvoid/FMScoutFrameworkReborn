@@ -11,12 +11,12 @@ namespace FMScoutFramework.Core.Entities.InGame
 	public class Team : BaseObject, ITeam
     {
         public TeamOffsets TeamOffsets;
-		public Team (int memoryAddress, IVersion version) 
+		public Team (Int64 memoryAddress, IVersion version) 
 			: base(memoryAddress, version)
 		{
             this.TeamOffsets = new TeamOffsets(version);
         }
-		public Team (int memoryAddress, ArraySegment<byte> originalBytes, IVersion version) 
+		public Team (Int64 memoryAddress, ArraySegment<byte> originalBytes, IVersion version) 
 			: base(memoryAddress, originalBytes, version)
 		{
             this.TeamOffsets = new TeamOffsets(version);
@@ -34,9 +34,9 @@ namespace FMScoutFramework.Core.Entities.InGame
 			}
 		}
 
-		private int ClubAddress {
+		private Int64 ClubAddress {
 			get {
-				return PropertyInvoker.Get<Int32> (TeamOffsets.Club, OriginalBytes, MemoryAddress, DatabaseMode);
+				return PropertyInvoker.Get<Int64> (TeamOffsets.Club, OriginalBytes, MemoryAddress, DatabaseMode);
 			}
 		}
 
@@ -59,58 +59,9 @@ namespace FMScoutFramework.Core.Entities.InGame
 		}
 
 		public ushort Reputation {
-			get {
-				if (Version.GetType () == typeof(Steam_14_3_0_Linux) ||
-                    Version.GetType() == typeof(Steam_14_3_0_Mac) ||
-                    Version.GetType() == typeof(Steam_14_3_0_Windows) ||
-                    Version.GetType() == typeof(Steam_14_3_1_Linux) ||
-                    Version.GetType() == typeof(Steam_14_3_1_Windows))
-                {
-					try{
-						int rotateAmount = ((MemoryAddress + TeamOffsets.Reputation) & 15);
-						uint encryptedRep = PropertyInvoker.Get<ushort> (TeamOffsets.Reputation, OriginalBytes, MemoryAddress, DatabaseMode);
-						encryptedRep = BitwiseOperations.rol_short (encryptedRep, rotateAmount);
-						encryptedRep = (encryptedRep ^ 0x130E);
-						encryptedRep = BitwiseOperations.rol_short (encryptedRep, 9);
-						encryptedRep = ~encryptedRep;
-
-						return (ushort)encryptedRep;
-					}
-					catch {
-						return 0;
-					}
-				}
-                else if (Version.GetType() == typeof(Steam_16_3_0_Windows) ||
-                    Version.GetType() == typeof(Steam_16_3_1_Windows))
-                {
-                    try
-                    {
-                        int rotateAmount = ((MemoryAddress + TeamOffsets.Reputation) & 0xf);
-                        uint encryptedRep = PropertyInvoker.Get<ushort>(TeamOffsets.Reputation, OriginalBytes, MemoryAddress, DatabaseMode);
-                        /* Encryption
-                        encryptedRep = (encryptedRep ^ 0x144b);
-                        encryptedRep = ~encryptedRep & 0xffff;
-                        encryptedRep = BitwiseOperations.rol_short(encryptedRep, 5) & 0xffff;
-                        encryptedRep = (encryptedRep ^ 0x9634);
-                        encryptedRep = BitwiseOperations.ror_short(encryptedRep, rotateAmount) & 0xffff;
-                        */
-
-                        encryptedRep = BitwiseOperations.rol_short(encryptedRep, rotateAmount) & 0xffff;
-                        encryptedRep = (encryptedRep ^ 0x9634);
-                        encryptedRep = BitwiseOperations.ror_short(encryptedRep, 5) & 0xffff;
-                        encryptedRep = ~encryptedRep & 0xffff;
-                        encryptedRep = (encryptedRep ^ 0x144b);
-
-                        return (ushort)encryptedRep;
-                    }
-                    catch
-                    {
-                        return 0;
-                    }
-                }
-                else {
+			get
+			{
 					return 0;
-				}
 			}
 		}
 

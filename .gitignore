@@ -2,3 +2,4 @@ bin/
 obj/
 FMScoutFramework.userprefs
 *.suo
+.vs/

@@ -8,10 +8,10 @@ namespace FMScoutFramework.Core.Entities.InGame
 {
 	public class PlayerStats : BaseObject, IPlayerStats
     {
-		public PlayerStats (int memoryAddress, IVersion version) 
+		public PlayerStats (Int64 memoryAddress, IVersion version) 
 			: base(memoryAddress, version)
 		{	}
-		public PlayerStats (int memoryAddress, ArraySegment<byte> originalBytes, IVersion version) 
+		public PlayerStats (Int64 memoryAddress, ArraySegment<byte> originalBytes, IVersion version) 
 			: base(memoryAddress, originalBytes, version)
 		{	}
 
@@ -271,13 +271,13 @@ namespace FMScoutFramework.Core.Entities.InGame
             }
         }
 
-		public byte Creativity {
+		public byte Vision {
 			get {
-				return PropertyInvoker.Get<byte> (PlayerStatsOffsets.Creativity, OriginalBytes, MemoryAddress, DatabaseMode);
+				return PropertyInvoker.Get<byte> (PlayerStatsOffsets.Vision, OriginalBytes, MemoryAddress, DatabaseMode);
 			}
             set
             {
-                PropertyInvoker.Set<byte>(PlayerStatsOffsets.Creativity, OriginalBytes, MemoryAddress, DatabaseMode, value);
+                PropertyInvoker.Set<byte>(PlayerStatsOffsets.Vision, OriginalBytes, MemoryAddress, DatabaseMode, value);
             }
         }
 
@@ -291,13 +291,13 @@ namespace FMScoutFramework.Core.Entities.InGame
             }
         }
 
-		public byte AerialAbility {
+		public byte AerialReach {
 			get {
-				return PropertyInvoker.Get<byte> (PlayerStatsOffsets.AerialAbility, OriginalBytes, MemoryAddress, DatabaseMode);
+				return PropertyInvoker.Get<byte> (PlayerStatsOffsets.AerialReach, OriginalBytes, MemoryAddress, DatabaseMode);
 			}
             set
             {
-                PropertyInvoker.Set<byte>(PlayerStatsOffsets.AerialAbility, OriginalBytes, MemoryAddress, DatabaseMode, value);
+                PropertyInvoker.Set<byte>(PlayerStatsOffsets.AerialReach, OriginalBytes, MemoryAddress, DatabaseMode, value);
             }
         }
 
@@ -561,23 +561,23 @@ namespace FMScoutFramework.Core.Entities.InGame
             }
         }
 
-		public byte Jumping {
+		public byte JumpingReach {
 			get {
-				return PropertyInvoker.Get<byte>(PlayerStatsOffsets.Jumping, OriginalBytes, MemoryAddress, DatabaseMode);
+				return PropertyInvoker.Get<byte>(PlayerStatsOffsets.JumpingReach, OriginalBytes, MemoryAddress, DatabaseMode);
 			}
             set
             {
-                PropertyInvoker.Set<byte>(PlayerStatsOffsets.Jumping, OriginalBytes, MemoryAddress, DatabaseMode, value);
+                PropertyInvoker.Set<byte>(PlayerStatsOffsets.JumpingReach, OriginalBytes, MemoryAddress, DatabaseMode, value);
             }
         }
 
-		public byte Influence {
+		public byte Leadership {
 			get {
-				return PropertyInvoker.Get<byte>(PlayerStatsOffsets.Influence, OriginalBytes, MemoryAddress, DatabaseMode);
+				return PropertyInvoker.Get<byte>(PlayerStatsOffsets.Leadership, OriginalBytes, MemoryAddress, DatabaseMode);
 			}
             set
             {
-                PropertyInvoker.Set<byte>(PlayerStatsOffsets.Influence, OriginalBytes, MemoryAddress, DatabaseMode, value);
+                PropertyInvoker.Set<byte>(PlayerStatsOffsets.Leadership, OriginalBytes, MemoryAddress, DatabaseMode, value);
             }
         }
 

@@ -1,9 +1,12 @@
-﻿namespace FMScoutFramework.Core.Entities.InGame.Interfaces
+﻿using System;
+
+namespace FMScoutFramework.Core.Entities.InGame.Interfaces
 {
     public interface IPlayer
     {
         int AskingPrice { get; }
-        int BansAddress { get; }
+        //long BansAddress { get; }
+        byte BodyType { get; }
         ushort CA { get; }
         short Condition { get; }
         short CurrentReputation { get; }
@@ -11,22 +14,23 @@
         double GrowthPotential { get; }
         ushort Height { get; }
         short HomeReputation { get; }
-        int ID { get; }
-        Injury[] Injuries { get; }
-        int InjuriesAddress { get; }
-        byte InternationalApps { get; }
-        byte InternationalGoals { get; }
-        bool isBanned { get; }
-        bool isInjured { get; }
+        //Injury[] Injuries { get; }
+        //long InjuriesAddress { get; }
+        //bool isBanned { get; }
+        //bool isInjured { get; }
         short Jadedness { get; }
+        byte Morale { get; }
         ushort PA { get; }
         PlayerStats PlayerStats { get; }
-        int RowID { get; }
-        Team Team { get; }
-        byte U21InternationalApps { get; }
-        byte U21InternationalGoals { get; }
+        // TODO: create and use enum
+        byte PreferredCentralPosition { get; }
+        // TODO: create and use enum
+        byte RoleUsedToFillEmptyAttributes { get; }
+        //Team Team { get; }
         int Value { get; }
-        ushort Weight { get; }
         short WorldReputation { get; }
+        //Contract LoanContract { get; } // TODO: should be its own type
+        //Contract BClubContract { get; }
+        //Contract NationContract { get; }
     }
 }

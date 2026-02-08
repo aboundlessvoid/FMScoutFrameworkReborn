@@ -8,10 +8,10 @@ namespace FMScoutFramework.Core.Entities.InGame
 {
 	public class City : BaseObject, ICity
     {
-		public City (int memoryAddress, IVersion version) 
+		public City (Int64 memoryAddress, IVersion version) 
 			: base(memoryAddress, version)
 		{	}
-		public City (int memoryAddress, ArraySegment<byte> originalBytes, IVersion version) 
+		public City (Int64 memoryAddress, ArraySegment<byte> originalBytes, IVersion version) 
 			: base(memoryAddress, originalBytes, version)
 		{	}
 

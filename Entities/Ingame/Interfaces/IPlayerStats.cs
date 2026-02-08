@@ -3,7 +3,7 @@
     public interface IPlayerStats
     {
         byte Acceleration { get; }
-        byte AerialAbility { get; }
+        byte AerialReach { get; }
         byte Aggression { get; }
         byte Agility { get; }
         byte Anticipation { get; }
@@ -18,7 +18,7 @@
         byte Concentration { get; }
         byte Consistency { get; }
         byte Corners { get; }
-        byte Creativity { get; }
+        byte Vision { get; }
         byte Crossing { get; }
         byte Decisions { get; }
         byte DefenderCenter { get; }
@@ -37,9 +37,9 @@
         byte Handling { get; }
         byte Heading { get; }
         byte ImportantMatches { get; }
-        byte Influence { get; }
+        byte Leadership { get; }
         byte InjuryProneness { get; }
-        byte Jumping { get; }
+        byte JumpingReach { get; }
         byte Kicking { get; }
         byte LeftFoot { get; }
         byte LongShots { get; }

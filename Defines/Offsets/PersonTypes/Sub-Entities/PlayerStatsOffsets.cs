@@ -30,9 +30,9 @@ namespace FMScoutFramework.Core.Offsets
 		public const short Passing = 0x16;
 		public const short Penalties = 0x17;
 		public const short Tackling = 0x18;
-		public const short Creativity = 0x19;
+		public const short Vision = 0x19;
 		public const short Handling = 0x1A;
-		public const short AerialAbility = 0x1B;
+		public const short AerialReach = 0x1B;
 		public const short CommandOfArea = 0x1C;
 		public const short Communication = 0x1D;
 		public const short Kicking = 0x1E;
@@ -59,8 +59,8 @@ namespace FMScoutFramework.Core.Offsets
 		public const short Strength = 0x33;
 		public const short Stamina = 0x34;
 		public const short Pace = 0x35;
-		public const short Jumping = 0x36;
-		public const short Influence = 0x37;
+		public const short JumpingReach = 0x36;
+		public const short Leadership = 0x37;
 		public const short Dirtiness = 0x38;
 		public const short Balance = 0x39;
 		public const short Bravery = 0x3A;

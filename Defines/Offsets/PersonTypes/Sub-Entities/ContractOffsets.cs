@@ -12,32 +12,29 @@ namespace FMScoutFramework.Core.Offsets
             this.Version = Version;
         }
 
-        public const short Person = 0x4;
-		public const short Team = 0x8;
-		public const short JobType = 0xC;
-		public const short Wage = 0x14;
-		public const short DateStarted = 0x20;
-		public const short DateExpires = 0x24;
-		public const short SquadStatus = 0x30;
-		public const short TransferStatus = 0x32;
-		public const short Clauses = 0x3C;
-		public const short Bonuses = 0x48;
-		public const short Type = 0x5D;
-
-        public short SquadNumber
-        {
-            get
-            {
-                if (Version.GetType() == typeof(Steam_16_3_0_Windows) ||
-                    Version.GetType() == typeof(Steam_16_3_1_Windows) ||
-                    Version.GetType() == typeof(Steam_16_3_2_Windows))
-                {
-                    return 0x39;
-                }
-
-                return 0x35;
-            }
-        }
+        public const short Person = 0x8;
+		public const short Club = 0x10; // also at 0x18?!
+		public const short JobType = 0x26;
+		public const short Wage = 0x20;
+		public const short DateStarted = 0x44;
+		public const short DateExpires = 0x48;
+		public const short DateSigned = 0x4C;
+		public const short PlayingTime = 0x54;
+		public const short PreviousPlayingTime = 0x55;
+		public const short FuturePlayingTime = 0xB8;
+		public const short FuturePlayingTimeYear = 0xBC;
+		public const short TransferStatusFlags = 0x57;
+        //public const short Clauses = 0x3C; // TODO: at 0x68?
+		//public const short Bonuses = 0x48; // TODO: also at 0x68?
+		public const short ContractType = 0xC3;
+		public const short SquadNumber = 0x5D;
+		public const short PreferredSquadNumber = 0x48;
+		public const short LoyaltyBonus = 0xA8;
+		public const short AgentFees = 0xAC;
+		public const short PlayingTimeHappiness = 0x5C;
+		public const short Happiness = 0x5A;
+		// 0x68
+		// 0x130
 	}
 }
 

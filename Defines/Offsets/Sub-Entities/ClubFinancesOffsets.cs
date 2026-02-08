@@ -29,20 +29,6 @@ namespace FMScoutFramework.Core.Offsets
         {
             get
             {
-                if (Version.GetType() == typeof(Steam_14_3_0_Linux) ||
-                    Version.GetType() == typeof(Steam_14_3_0_Windows) ||
-                    Version.GetType() == typeof(Steam_14_3_0_Mac) ||
-                    Version.GetType() == typeof(Steam_14_3_1_Linux) ||
-                    Version.GetType() == typeof(Steam_14_3_1_Windows) ||
-                    Version.GetType() == typeof(Steam_14_3_1_Mac))
-                {
-                    return 0xAC;
-                }
-                else if (Version.GetType() == typeof(Steam_15_2_1_Windows))
-                {
-                    return 0xB0;
-                }
-
                 return 0x0;
             }
         }
@@ -51,14 +37,7 @@ namespace FMScoutFramework.Core.Offsets
         {
             get
             {
-                if (Version.GetType() == typeof(Steam_16_3_0_Windows) ||
-                    Version.GetType() == typeof(Steam_16_3_1_Windows) ||
-                    Version.GetType() == typeof(Steam_16_3_2_Windows))
-                {
-                    return 0x74;
-                }
-
-                return 0x70;
+                return 0x0; // TODO
             }
         }
 
@@ -66,14 +45,7 @@ namespace FMScoutFramework.Core.Offsets
         {
             get
             {
-                if (Version.GetType() == typeof(Steam_16_3_0_Windows) ||
-                    Version.GetType() == typeof(Steam_16_3_1_Windows) ||
-                    Version.GetType() == typeof(Steam_16_3_2_Windows))
-                {
-                    return 0x78;
-                }
-
-                return 0x74;
+                return 0x0; // TODO
             }
         }
 
@@ -81,14 +53,7 @@ namespace FMScoutFramework.Core.Offsets
         {
             get
             {
-                if (Version.GetType() == typeof(Steam_16_3_0_Windows) ||
-                    Version.GetType() == typeof(Steam_16_3_1_Windows) ||
-                    Version.GetType() == typeof(Steam_16_3_2_Windows))
-                {
-                    return 0x7c;
-                }
-
-                return 0x78;
+                return 0x0; // TODO
             }
         }
 

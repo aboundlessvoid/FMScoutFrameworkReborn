@@ -5,45 +5,44 @@ namespace FMScoutFramework.Core.Entities.GameVersions
 {
 	public interface IVersionMemoryAddresses
 	{
-		int MainAddress { get; }
-		int MainOffset { get; }
-		int XorDistance { get; }
-		int StringOffset { get; }
-		byte[] versionSig { get; }
+        Int64 MainAddress { get; }
+        Int64 MainOffset { get; }
+        Int64 XorDistance { get; }
+        int StringOffset { get; }
 
-		[MemoryAddress(CountLength = 4, BytesToSkip = 0x28)]
-		int City { get; }
+		//[MemoryAddress(CountLength = 4, BytesToSkip = 0x28)]
+		//      Int64 City { get; }
 
-		[MemoryAddressAttribute(CountLength = 4, BytesToSkip = 0x28)]
-		int Club { get; }
-
-		[MemoryAddressAttribute(CountLength = 4, BytesToSkip = 0x28)]
-		int Continent { get; }
+		//[MemoryAddressAttribute(CountLength = 4, BytesToSkip = 0x28)]
+		//      Int64 Club { get; }
 
 		[MemoryAddressAttribute(CountLength = 4, BytesToSkip = 0x28)]
-		int Nation { get; }
+		Int64 Continent { get; }
 
 		[MemoryAddressAttribute(CountLength = 4, BytesToSkip = 0x28)]
-		int League { get; }
+		Int64 Nation { get; }
+
+		//[MemoryAddressAttribute(CountLength = 4, BytesToSkip = 0x28)]
+		//      Int64 League { get; }
 
 		/*
 		[MemoryAddressAttribute(CountLength = 4, BytesToSkip = 0x28)]
-		int Language { get; } */
+		Int64 Language { get; } */
+
+		//      [MemoryAddressAttribute(CountLength = 4, BytesToSkip = 0x28)]
+		//      Int64 Stadium { get; }
+
+		//[MemoryAddressAttribute(CountLength = 4, BytesToSkip = 0x28)]
+		//      Int64 Team { get; }
 
 		[MemoryAddressAttribute(CountLength = 4, BytesToSkip = 0x28)]
-		int Stadium { get; }
+		Int64 Person { get; }
 
-		[MemoryAddressAttribute(CountLength = 4, BytesToSkip = 0x28)]
-		int Team { get; }
-
-		[MemoryAddressAttribute(CountLength = 4, BytesToSkip = 0x28)]
-		int Person { get; }
-
-		int CurrentDateTime { get; }
+		Int64 CurrentDateTime { get; }
 
 		/*
 		[MemoryAddressAttribute(CountLength = 4, BytesToSkip = 0x28)]
-		int ActiveObject { get; } */
+		Int64 ActiveObject { get; } */
 	}
 }
 

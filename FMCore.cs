@@ -38,7 +38,7 @@ namespace FMScoutFramework.Core
 
 		private IQueryable<T> GetListFromStore<T>()
 		{
-			return ((Dictionary<int, T>)objectManager.ObjectStore [typeof(T)]).Values.AsQueryable ();
+			return ((Dictionary<long, T>)objectManager.ObjectStore [typeof(T)]).Values.AsQueryable ();
 		}
 		#endregion
 

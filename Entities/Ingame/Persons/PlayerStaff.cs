@@ -6,10 +6,10 @@ namespace FMScoutFramework.Core.Entities.InGame
 {
 	public class PlayerStaff : BaseObject, IPlayerStaff
 	{
-		public PlayerStaff (int memoryAddress, IVersion version) 
+		public PlayerStaff (Int64 memoryAddress, IVersion version) 
 			: base(memoryAddress, version)
 		{	}
-		public PlayerStaff (int memoryAddress, ArraySegment<byte> originalBytes, IVersion version) 
+		public PlayerStaff (Int64 memoryAddress, ArraySegment<byte> originalBytes, IVersion version) 
 			: base(memoryAddress, originalBytes, version)
 		{	}
 	}

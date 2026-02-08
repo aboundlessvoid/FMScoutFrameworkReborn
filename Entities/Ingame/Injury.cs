@@ -8,10 +8,10 @@ namespace FMScoutFramework.Core.Entities.InGame
 {
 	public class Injury : BaseObject, IInjury
     {
-		public Injury (int memoryAddress, IVersion version) 
+		public Injury (Int64 memoryAddress, IVersion version) 
 			: base(memoryAddress, version)
 		{	}
-		public Injury (int memoryAddress, ArraySegment<byte> originalBytes, IVersion version) 
+		public Injury (Int64 memoryAddress, ArraySegment<byte> originalBytes, IVersion version) 
 			: base(memoryAddress, originalBytes, version)
 		{	}
 

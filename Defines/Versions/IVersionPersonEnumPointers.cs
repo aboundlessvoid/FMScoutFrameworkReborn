@@ -1,11 +1,13 @@
-﻿namespace FMScoutFramework.Core.Entities.GameVersions
+﻿using System;
+
+namespace FMScoutFramework.Core.Entities.GameVersions
 {
 	public interface IVersionPersonEnumPointers
 	{
-		int Player { get; }
-		int Staff { get; }
-		int PlayerStaff { get; }
-		int HumanManager { get; }
-		int Official { get; }
+        ushort Player { get; }
+        ushort Staff { get; }
+        ushort PlayerStaff { get; }
+        //ushort HumanManager { get; }
+        ushort Official { get; }
 	}
 }

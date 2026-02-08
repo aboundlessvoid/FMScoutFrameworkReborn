@@ -10,12 +10,12 @@ namespace FMScoutFramework.Core.Entities.InGame
 	public class Club : BaseObject, IClub
     {
         public ClubOffsets ClubOffsets;
-		public Club (int memoryAddress, IVersion version) 
+		public Club (Int64 memoryAddress, IVersion version) 
 			: base(memoryAddress, version)
 		{
             this.ClubOffsets = new ClubOffsets(Version);
         }
-		public Club (int memoryAddress, ArraySegment<byte> originalBytes, IVersion version) 
+		public Club (Int64 memoryAddress, ArraySegment<byte> originalBytes, IVersion version) 
 			: base(memoryAddress, originalBytes, version)
 		{
             this.ClubOffsets = new ClubOffsets(Version);
@@ -35,12 +35,12 @@ namespace FMScoutFramework.Core.Entities.InGame
 
 		public Team[] Teams {
 			get {
-				int teamCount = ProcessManager.ReadArrayLength (MemoryAddress + ClubOffsets.Teams);
+				long teamCount = ProcessManager.ReadArrayLength (MemoryAddress + ClubOffsets.Teams);
 				Team[] result = new Team[teamCount];
 
 				for(int i = 0; i < teamCount; i++) {
-					int teamAddress = PropertyInvoker.Get<Int32> (ClubOffsets.Teams, OriginalBytes, MemoryAddress, DatabaseMode);
-					result [i] = PropertyInvoker.GetPointer<Team> (0x0, OriginalBytes, (teamAddress + (i * 4)), DatabaseMode, Version);
+                    Int64 teamAddress = PropertyInvoker.Get<Int64> (ClubOffsets.Teams, OriginalBytes, MemoryAddress, DatabaseMode);
+					result [i] = PropertyInvoker.GetPointer<Team> (0x0, OriginalBytes, (teamAddress + (i * 8)), DatabaseMode, Version);
 				}
 
 				return result;

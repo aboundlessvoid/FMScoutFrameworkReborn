@@ -9,24 +9,24 @@ namespace FMScoutFramework.Core.Entities.InGame
 	public class Staff : Person, IStaff
     {
 		private StaffOffsets StaffOffsets;
-		public Staff (int memoryAddress, IVersion version) 
+		public Staff (Int64 memoryAddress, IVersion version) 
 			: base(memoryAddress, version)
 		{	
 			this.StaffOffsets = new StaffOffsets (version);
 		}
-		public Staff (int memoryAddress, ArraySegment<byte> originalBytes, IVersion version) 
+		public Staff (Int64 memoryAddress, ArraySegment<byte> originalBytes, IVersion version) 
 			: base(memoryAddress, originalBytes, version)
 		{	
 			this.StaffOffsets = new StaffOffsets (version);
 		}
 
-		protected override int PersonAddress {
+		protected override Int64 PersonAddress {
 			get {
 				return StaffAddress + StaffOffsets.PersonAddress;
 			}
 		}
 
-		private int StaffAddress {
+		private Int64 StaffAddress {
 			get {
 				return MemoryAddress + Version.PersonOffsets.Staff;
 			}

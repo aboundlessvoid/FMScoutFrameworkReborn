@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Linux-Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -7,7 +7,8 @@
     <OutputType>Library</OutputType>
     <RootNamespace>FMScoutFramework</RootNamespace>
     <AssemblyName>FMScoutFramework</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Linux-Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -49,9 +50,8 @@
     <Reference Include="System.Configuration" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Defines\Versions\Steam_16_3_1_Windows.cs" />
-    <Compile Include="Defines\Versions\Steam_16_3_0_Windows.cs" />
-    <Compile Include="Defines\Versions\Steam_16_3_2_Windows.cs" />
+    <Compile Include="Defines\Offsets\ContinentOffsets.cs" />
+    <Compile Include="Defines\Versions\Steam_26_1_2_Windows.cs" />
     <Compile Include="FMCore.cs" />
     <Compile Include="Attributes\MemoryAddressAttribute.cs" />
     <Compile Include="Converters\DateConverter.cs" />
@@ -60,14 +60,6 @@
     <Compile Include="Defines\Versions\IVersion.cs" />
     <Compile Include="Defines\Versions\IVersionMemoryAddresses.cs" />
     <Compile Include="Defines\Versions\IVersionPersonEnumPointers.cs" />
-    <Compile Include="Defines\Versions\Steam_14_3_0_Linux.cs" />
-    <Compile Include="Defines\Versions\Steam_14_3_1_Windows.cs" />
-    <Compile Include="Defines\Versions\Steam_14_3_0_Windows.cs" />
-    <Compile Include="Defines\Versions\Steam_14_3_0_Mac.cs" />
-    <Compile Include="Defines\Versions\Steam_14_3_1_Linux.cs" />
-    <Compile Include="Defines\Versions\Steam_14_3_1_Mac.cs" />
-    <Compile Include="Defines\Versions\Steam_15_2_1_Windows.cs" />
-    <Compile Include="Defines\Versions\Steam_15_3_2_Mac.cs" />
     <Compile Include="Defines\FMProcess.cs" />
     <Compile Include="Defines\Offsets\CityOffsets.cs" />
     <Compile Include="Defines\Offsets\ClubOffsets.cs" />
@@ -129,9 +121,6 @@
     <Compile Include="VirtualMemory\Managers\ObjectManager.cs" />
     <Compile Include="VirtualMemory\Managers\ProcessManager.cs" />
     <Compile Include="VirtualMemory\Managers\PropertyInvoker.cs" />
-    <Compile Include="Defines\Versions\Steam_16_2_0_Linux.cs" />
-    <Compile Include="Defines\Versions\Steam_15_3_2_Windows.cs" />
-    <Compile Include="Defines\Versions\Steam_16_2_0_Windows.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="FMScoutFramework.csproj" />

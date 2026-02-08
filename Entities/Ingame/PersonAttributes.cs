@@ -8,10 +8,10 @@ namespace FMScoutFramework.Core.Entities.InGame
 {
 	public class PersonAttributes : BaseObject, IPersonAttributes
     {
-		public PersonAttributes (int memoryAddress, IVersion version) 
+		public PersonAttributes (Int64 memoryAddress, IVersion version) 
 			: base(memoryAddress, version)
 		{	}
-		public PersonAttributes (int memoryAddress, ArraySegment<byte> originalBytes, IVersion version) 
+		public PersonAttributes (Int64 memoryAddress, ArraySegment<byte> originalBytes, IVersion version) 
 			: base(memoryAddress, originalBytes, version)
 		{	}
 

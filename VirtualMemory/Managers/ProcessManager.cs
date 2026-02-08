@@ -21,11 +21,12 @@ namespace FMScoutFramework.Core.Managers
 		}
 
 		#if WINDOWS
-		public static int GetProcessEndPoint(IntPtr process) {
-			int bytesRead = 0;
-			int memoryAddress = 0x7fffffff;
-			int num3 = 0x1000000;
-			for (int i = 1; i <= 7; i++) {
+		public static Int64 GetProcessEndPoint(IntPtr process) {
+			Int64 bytesRead = 0;
+			// TODO: num3 and the loop length likely need to be adapted
+			Int64 memoryAddress = 0x7fffffffffff;
+            Int64 num3 = 0x10000000000;
+			for (int i = 1; i <= 11; i++) {
 				ReadProcessMemory (process, memoryAddress, 1, out bytesRead);
 				while (bytesRead == 0) {
 					memoryAddress -= num3;
@@ -57,7 +58,7 @@ namespace FMScoutFramework.Core.Managers
 		#region ReadProcessMemoryExtensions
 
 		#if WINDOWS
-		private static byte[] ReadProcessMemory(IntPtr process, int memoryAddress, uint bytesToRead, out int bytesRead)
+		private static byte[] ReadProcessMemory(IntPtr process, Int64 memoryAddress, uint bytesToRead, out Int64 bytesRead)
 		{
 			IntPtr ptr;
 			byte[] buffer = new byte[bytesToRead];
@@ -66,22 +67,22 @@ namespace FMScoutFramework.Core.Managers
 			return buffer;
 		}
 
-		public static byte[] ReadProcessMemory(int memoryAddress, uint bytesToRead)
+		public static byte[] ReadProcessMemory(Int64 memoryAddress, uint bytesToRead)
 		{
 			if (memoryAddress > 0) {
-				int num;
+				Int64 num;
 				if (bytesToRead <= (32 * 1024 * 1024))
 					return ReadProcessMemory (memoryAddress, bytesToRead, out num);
 			}
 			return new byte[4];
 		}
 
-        public static byte[] ReadProcessMemory(int memoryAddress, uint bytesToRead, out int bytesRead)
+        public static byte[] ReadProcessMemory(Int64 memoryAddress, uint bytesToRead, out Int64 bytesRead)
         {
             IntPtr ptr;
             byte[] buffer = new byte[bytesToRead];
             ProcessMemoryAPI.ReadProcessMemory(FMProcess.Pointer, (IntPtr)memoryAddress, buffer, bytesToRead, out ptr);
-            bytesRead = ptr.ToInt32();
+            bytesRead = ptr.ToInt64();
             return buffer;
         }
 		#endif
@@ -124,52 +125,63 @@ namespace FMScoutFramework.Core.Managers
 		}
 		#endif
 
-		public static byte ReadByte(int address)
+		public static byte ReadByte(Int64 address)
 		{
 			return ReadProcessMemory (address, 1) [0];
 		}
 
-		public static sbyte ReadSByte(int address)
+		public static sbyte ReadSByte(Int64 address)
 		{
 			return (sbyte)ReadProcessMemory (address, 1) [0];
 		}
 
-		public static Int16 ReadInt16(int address)
+		public static Int16 ReadInt16(Int64 address)
 		{
 			byte[] buffer = ReadProcessMemory (address, 2);
 			return ReadInt16 (buffer, 0);
 		}
 
-		public static float ReadFloat(int address)
+		public static float ReadFloat(Int64 address)
 		{
 			byte[] buffer = ReadProcessMemory (address, 4);
 			return ReadFloat (buffer, 0);
 		}
 
-        public static double ReadDouble(int address) {
+        public static double ReadDouble(Int64 address) {
             byte[] buffer = ReadProcessMemory (address, 4);
             return ReadDouble (buffer, 0);
         }
 
-		public static Int32 ReadInt32(int address)
+		public static Int32 ReadInt32(Int64 address)
 		{
 			byte[] buffer = ReadProcessMemory (address, 4);
 			return ReadInt32 (buffer, 0);
 		}
 
-		public static UInt32 ReadUInt32(int address)
+		public static UInt32 ReadUInt32(Int64 address)
 		{
-			byte[] buffer = ReadProcessMemory ((int)address, 4);
+			byte[] buffer = ReadProcessMemory (address, 4);
 			return ReadUInt32 (buffer, 0);
 		}
+        public static Int64 ReadInt64(Int64 address)
+        {
+            byte[] buffer = ReadProcessMemory(address, 8);
+            return ReadInt64(buffer, 0);
+        }
 
-		public static ushort ReadUInt16(int address)
+        public static UInt64 ReadUInt64(Int64 address)
+        {
+            byte[] buffer = ReadProcessMemory(address, 8);
+            return ReadUInt64(buffer, 0);
+        }
+
+        public static ushort ReadUInt16(Int64 address)
 		{
 			byte[] buffer = ReadProcessMemory (address, 2);
 			return ReadUInt16 (buffer, 0);
 		}
 
-		public static DateTime ReadDateTime(int address)
+		public static DateTime ReadDateTime(Int64 address)
 		{
 			int days = (ReadInt16 (address) & 0x1FF);
 			int years = ReadInt16 (address + 0x2);
@@ -179,38 +191,43 @@ namespace FMScoutFramework.Core.Managers
 			return new DateTime (1900, 1, 1);
 		}
 
-		public static string ReadString(int currentAddress, int? addBufferIndex, bool isRead)
+		public static string ReadString(Int64 currentAddress, int? addBufferIndex, bool isRead)
 		{
 			return ReadString (currentAddress, addBufferIndex, 0, isRead);
 		}
 
-		public static string ReadString(int currentAddress, int? addBufferIndex)
+		public static string ReadString(Int64 currentAddress, int? addBufferIndex)
 		{
 			return ReadString (currentAddress, addBufferIndex, 0, false);
 		}
 
 		private static Dictionary<string, string> readStringCache = new Dictionary<string, string>();
-		public static string ReadString(int currentAddress, int? addBufferIndex, int offset, bool isRead)
+		public static string ReadString(Int64 currentAddress, int? addBufferIndex, int offset, bool isRead)
 		{
 			string cacheKey = string.Format ("{0}.{1}.{2}.{3}", currentAddress, addBufferIndex ?? -1, offset, isRead);
 			if (!readStringCache.ContainsKey (cacheKey)) {
+				
 				if (!isRead)
-					currentAddress = ProcessManager.ReadInt32 (currentAddress);
+					currentAddress = ProcessManager.ReadInt64 (currentAddress);
+
+				// optional strings like nicknames have zero pointers
+				if (currentAddress == 0)
+				{
+					return "";
+				}
 
 				if (addBufferIndex >= 0)
-					currentAddress = ProcessManager.ReadInt32 (currentAddress + (int)addBufferIndex);
+					currentAddress = ProcessManager.ReadInt64 (currentAddress + (int)addBufferIndex);
 
 				string str = "";
 
-				// Skip the first byte
-				currentAddress += 0x1;
 				// Get the string Length
 				int length = (int)ProcessManager.ReadInt16(currentAddress);
 				if (length <= 0) {
 					return "-";
 				}
-				length = length * 2;
-				currentAddress += 0x3;
+
+				currentAddress += 0x4;
 
                 #if WINDOWS
                 byte[] buffer = ProcessManager.ReadProcessMemory(currentAddress, (uint)length);
@@ -222,38 +239,38 @@ namespace FMScoutFramework.Core.Managers
 				if (buffer.Length < length) {
 					return "";
 				}
-				str = UnicodeEncoding.Unicode.GetString (buffer);
+				str = UTF8Encoding.UTF8.GetString (buffer);
 
 				readStringCache.Add (cacheKey, str);
 			}
 			return readStringCache [cacheKey];
 		}
 
-		public static int ReadArrayLength(int currentAddress) {
-			return ReadArrayLength (currentAddress, 0x4);
+		public static Int64 ReadArrayLength(Int64 currentAddress) {
+			return ReadArrayLength (currentAddress, 0x8);
 		}
 
-		public static int ReadArrayLength(int currentAddress, int objectLength)
+		public static Int64 ReadArrayLength(Int64 currentAddress, int objectLength)
 		{
-			int addressOne = ProcessManager.ReadInt32 (currentAddress);
-			int addressTwo = ProcessManager.ReadInt32 (currentAddress + 0x4);
-
+            Int64 addressOne = ProcessManager.ReadInt64 (currentAddress);
+            Int64 addressTwo = ProcessManager.ReadInt64 (currentAddress + 0x8);
+			Debug.WriteLine("{0}, {1}", addressOne.ToString("X"), addressTwo.ToString("X"));
 			return ((addressTwo - addressOne) / objectLength);
 		}
 		#endregion
 
 		#region ReadFromBuffer
-		private static Dictionary<int, string> stringCache = new Dictionary<int, string> ();
+		private static Dictionary<Int64, string> stringCache = new Dictionary<Int64, string> ();
 		public static string ReadString(ArraySegment<byte> buffer, int offset, int additionalStringOffset)
 		{
-			int stringPointer = ReadInt32 (buffer.Array, offset + buffer.Offset);
+            Int64 stringPointer = ReadInt64 (buffer.Array, offset + buffer.Offset);
 			if (!stringCache.ContainsKey (stringPointer))
 				stringCache.Add (stringPointer, ReadString (stringPointer, -1, additionalStringOffset, true));
 
 			return stringCache [stringPointer];
 		}
 
-		public static short ReadInt16(byte[] buffer, int offset)
+        public static short ReadInt16(byte[] buffer, int offset)
 		{
 			return BitConverter.ToInt16 (buffer, offset);
 		}
@@ -263,7 +280,12 @@ namespace FMScoutFramework.Core.Managers
 			return BitConverter.ToInt32 (buffer, offset);
 		}
 
-		public static ushort ReadUInt16(byte[] buffer, int offset)
+        public static Int64 ReadInt64(byte[] buffer, int offset)
+        {
+            return BitConverter.ToInt64 (buffer, offset);
+        }
+
+        public static ushort ReadUInt16(byte[] buffer, int offset)
 		{
 			return BitConverter.ToUInt16 (buffer, offset);
 		}
@@ -272,6 +294,11 @@ namespace FMScoutFramework.Core.Managers
 		{
 			return BitConverter.ToUInt32 (buffer, offset);
 		}
+
+        public static UInt64 ReadUInt64(byte[] buffer, int offset)
+        {
+            return BitConverter.ToUInt64 (buffer, offset);
+        }
 
         public static double ReadDouble(byte[] buffer, int offset)
         {
@@ -283,6 +310,7 @@ namespace FMScoutFramework.Core.Managers
 			return BitConverter.ToSingle (buffer, offset);
 		}
 
+		// probably broken this way but unused
 		public static int GetAddress(byte[] buffer, int index) 
 		{
 			int num = 0;
@@ -301,11 +329,11 @@ namespace FMScoutFramework.Core.Managers
 
         #region WriteProcessMemory
         #if WINDOWS
-        public static int WriteProcessMemory(int memoryaddress, byte[] buffer, uint bytesToWrite)
+        public static Int64 WriteProcessMemory(Int64 memoryaddress, byte[] buffer, uint bytesToWrite)
         {
             IntPtr ptr;
             ProcessMemoryAPI.WriteProcessMemory(FMProcess.Pointer, (IntPtr)memoryaddress, buffer, bytesToWrite, out ptr);
-            return ptr.ToInt32();
+            return ptr.ToInt64();
         }
         #endif
 		#if LINUX || MAC
@@ -315,24 +343,24 @@ namespace FMScoutFramework.Core.Managers
         }
         #endif
 
-        public static void WriteByte(byte value, int address)
+        public static void WriteByte(byte value, Int64 address)
         {
             byte[] buffer = new byte[] { value };
             WriteProcessMemory(address, buffer, 1);
         }
 
-        public static void WriteDateTime(DateTime value, int address)
+        public static void WriteDateTime(DateTime value, Int64 address)
         {
             WriteInt16(value.DayOfYear, address);
             WriteInt16(value.Year, address + 2);
         }
 
-        public static void WriteInt16(int value, int address)
+        public static void WriteInt16(int value, Int64 address)
         {
             WriteInt16(value, address, false);
         }
 
-        public static void WriteInt16(int value, int address, bool reverse)
+        public static void WriteInt16(int value, Int64 address, bool reverse)
         {
             byte[] buffer = new byte[2];
             if (!reverse)
@@ -348,12 +376,12 @@ namespace FMScoutFramework.Core.Managers
             WriteProcessMemory(address, buffer, 2);
         }
 
-        public static void WriteInt32(int value, int address)
+        public static void WriteInt32(int value, Int64 address)
         {
             WriteInt32(value, address, false);
         }
 
-        public static void WriteInt32(int value, int address, bool reverse)
+        public static void WriteInt32(int value, Int64 address, bool reverse)
         {
             byte[] buffer = new byte[4];
             if (!reverse)
@@ -373,32 +401,67 @@ namespace FMScoutFramework.Core.Managers
             WriteProcessMemory(address, buffer, 4);
         }
 
-        public static void WriteFloat(float value, int address)
+        public static void WriteInt64(Int64 value, Int64 address)
+        {
+            WriteInt64(value, address, false);
+        }
+
+        public static void WriteInt64(Int64 value, Int64 address, bool reverse)
+        {
+            byte[] buffer = new byte[8];
+            if (!reverse)
+            {
+                buffer[0] = (byte)(value & 0xFF);
+                buffer[1] = (byte)((value & 0xFF00) >> 8);
+                buffer[2] = (byte)((value & 0xFF0000) >> 0x10);
+                buffer[3] = (byte)((value & 0xFF000000) >> 0x18);
+                buffer[4] = (byte)((value & 0xFF00000000) >> 0x20);
+                buffer[5] = (byte)((value & 0xFF0000000000) >> 0x28);
+                buffer[6] = (byte)((value & 0xFF000000000000) >> 0x30);
+				// TODO: not sure if this will work as expected -> i don't know enough about c# casts
+                buffer[7] = (byte)(((ulong)value & 0xFF00000000000000) >> 0x38);
+            }
+            else
+            {
+                buffer[7] = (byte)(value & 0xFF);
+                buffer[6] = (byte)((value & 0xFF00) >> 8);
+                buffer[5] = (byte)((value & 0xFF0000) >> 0x10);
+                buffer[4] = (byte)((value & 0xFF000000) >> 0x18);
+                buffer[3] = (byte)((value & 0xFF00000000) >> 0x20);
+                buffer[2] = (byte)((value & 0xFF0000000000) >> 0x28);
+                buffer[1] = (byte)((value & 0xFF000000000000) >> 0x30);
+                // TODO: not sure if this will work as expected -> i don't know enough about c# casts
+                buffer[0] = (byte)(((ulong)value & 0xFF00000000000000) >> 0x38);
+            }
+            WriteProcessMemory(address, buffer, 4);
+        }
+
+        public static void WriteFloat(float value, Int64 address)
         {
             byte[] buffer = BitConverter.GetBytes(value);
             WriteProcessMemory(address, buffer, 4);
         }
 
-        public static void WriteSByte(sbyte value, int address)
+        public static void WriteSByte(sbyte value, Int64 address)
         {
             byte[] buffer = new byte[] { (byte)value };
             WriteProcessMemory(address, buffer, 1);
         }
 
-        public static void WriteString(byte[] value, int address)
+        public static void WriteString(byte[] value, Int64 address)
         {
             WriteProcessMemory(address, value, 4);
         }
 
-        public static void ResizeArray(int currentAddress, int newLength)
+        public static void ResizeArray(Int64 currentAddress, int newLength)
         {
             ResizeArray(currentAddress, 0x4, newLength);
         }
 
-        public static void ResizeArray(int currentAddress, int objectLength, int newLength)
+        public static void ResizeArray(Int64 currentAddress, int objectLength, int newLength)
         {
-            int addressOne = ProcessManager.ReadInt32(currentAddress);
-            ProcessManager.WriteInt32(addressOne + objectLength * newLength, currentAddress + 0x4);
+            Int64 addressOne = ProcessManager.ReadInt64(currentAddress);
+            ProcessManager.WriteInt64(addressOne + objectLength * newLength, currentAddress + 0x8);
         }
         #endregion
 

@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("FMScoutFramework")]
+[assembly: AssemblyTitle("FMScoutFramework Reborn")]
 [assembly: AssemblyDescription("A Football Manager cross platform Scout and Editor framework")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Thanos Siopoudis")]
-[assembly: AssemblyProduct("FMScoutFramework")]
-[assembly: AssemblyCopyright("Thanos Siopoudis 2014")]
+[assembly: AssemblyCompany("aboundlessvoid")]
+[assembly: AssemblyProduct("FMScoutFramework Reborn")]
+[assembly: AssemblyCopyright("Original Copyright: Thanos Siopoudis 2014-2016, Modifications: aboundlessvoid 2026")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

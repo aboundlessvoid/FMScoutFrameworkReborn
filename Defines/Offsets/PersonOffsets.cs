@@ -16,21 +16,7 @@ namespace FMScoutFramework.Core.Offsets
 		{
 			get
 			{
-                if (Version.GetType() == typeof(Steam_14_3_0_Linux) ||
-                    Version.GetType() == typeof(Steam_14_3_0_Mac) ||
-                    Version.GetType() == typeof(Steam_14_3_1_Linux) ||
-                    Version.GetType() == typeof(Steam_15_3_2_Mac) ||
-                    Version.GetType() == typeof(Steam_15_3_2_Windows))
-                    return 0xC;
-                else if (Version.GetType() == typeof(Steam_16_3_0_Windows) ||
-                         Version.GetType() == typeof(Steam_16_3_1_Windows)  ||
-                         Version.GetType() == typeof(Steam_16_3_2_Windows))
-
-                    return 0x2C;
-                else if (Version.GetType() == typeof(Steam_15_2_1_Windows))
-                    return 0x160;
-                else
-                    return 0x178;
+                return 0x88;
 			}
 		}
 
@@ -38,20 +24,7 @@ namespace FMScoutFramework.Core.Offsets
 		{
 			get
 			{
-                if (Version.GetType() == typeof(Steam_14_3_0_Linux) ||
-                    Version.GetType() == typeof(Steam_14_3_0_Mac) ||
-                    Version.GetType() == typeof(Steam_14_3_1_Linux) ||
-                    Version.GetType() == typeof(Steam_15_3_2_Mac) ||
-                    Version.GetType() == typeof(Steam_15_3_2_Windows))
-                    return 0x10;
-                else if (Version.GetType() == typeof(Steam_16_3_0_Windows) ||
-                         Version.GetType() == typeof(Steam_16_3_1_Windows) ||
-                         Version.GetType() == typeof(Steam_16_3_2_Windows))
-                    return 0x30;
-                else if (Version.GetType() == typeof(Steam_15_2_1_Windows))
-                    return 0x164;
-                else
-                    return 0x17C;
+                return 0x40;
 			}
 		}
 
@@ -59,20 +32,7 @@ namespace FMScoutFramework.Core.Offsets
 		{
 			get
 			{
-                if (Version.GetType() == typeof(Steam_14_3_0_Linux) ||
-                    Version.GetType() == typeof(Steam_14_3_0_Mac) ||
-                    Version.GetType() == typeof(Steam_14_3_1_Linux) ||
-                    Version.GetType() == typeof(Steam_15_3_2_Mac) ||
-                    Version.GetType() == typeof(Steam_15_3_2_Windows))
-                    return 0x18;
-                else if (Version.GetType() == typeof(Steam_16_3_0_Windows) ||
-                         Version.GetType() == typeof(Steam_16_3_1_Windows) ||
-                         Version.GetType() == typeof(Steam_16_3_2_Windows))
-                    return 0x38;
-                else if (Version.GetType() == typeof(Steam_15_2_1_Windows))
-                    return 0x16C;
-                else
-                    return 0x184;
+                return 0x50;
 			}
 		}
 
@@ -80,21 +40,7 @@ namespace FMScoutFramework.Core.Offsets
 		{
 			get
 			{
-                if (Version.GetType() == typeof(Steam_14_3_0_Linux) ||
-                    Version.GetType() == typeof(Steam_14_3_0_Mac) ||
-                    Version.GetType() == typeof(Steam_14_3_1_Linux) ||
-                    Version.GetType() == typeof(Steam_15_3_2_Mac) ||
-                    Version.GetType() == typeof(Steam_15_3_2_Windows))
-                    return 0x1C;
-                else if (Version.GetType() == typeof(Steam_16_3_0_Windows) || 
-                         Version.GetType() == typeof(Steam_16_3_1_Windows) ||
-                         Version.GetType() == typeof(Steam_16_3_2_Windows))
-
-                    return 0x3C;
-                else if (Version.GetType() == typeof(Steam_15_2_1_Windows))
-                    return 0x170;
-                else
-                    return 0x188;
+                return 0x58;
 			}
 		}
 
@@ -102,20 +48,7 @@ namespace FMScoutFramework.Core.Offsets
 		{
 			get
 			{
-                if (Version.GetType() == typeof(Steam_14_3_0_Linux) ||
-                    Version.GetType() == typeof(Steam_14_3_0_Mac) ||
-                    Version.GetType() == typeof(Steam_14_3_1_Linux) ||
-                    Version.GetType() == typeof(Steam_15_3_2_Mac) ||
-                    Version.GetType() == typeof(Steam_15_3_2_Windows))
-                    return 0x20;
-                else if (Version.GetType() == typeof(Steam_16_3_0_Windows) ||
-                         Version.GetType() == typeof(Steam_16_3_1_Windows) ||
-                         Version.GetType() == typeof(Steam_16_3_2_Windows))
-                    return 0x40;
-                else if (Version.GetType() == typeof(Steam_15_2_1_Windows))
-                    return 0x174;
-                else
-                    return 0x180;
+                return 0x60;
 			}
 		}
 
@@ -123,20 +56,7 @@ namespace FMScoutFramework.Core.Offsets
 		{
 			get
 			{
-                if (Version.GetType() == typeof(Steam_14_3_0_Linux) ||
-                    Version.GetType() == typeof(Steam_14_3_0_Mac) ||
-                    Version.GetType() == typeof(Steam_14_3_1_Linux) ||
-                    Version.GetType() == typeof(Steam_15_3_2_Mac) ||
-                    Version.GetType() == typeof(Steam_15_3_2_Windows))
-                    return 0x24;
-                else if (Version.GetType() == typeof(Steam_16_3_0_Windows) ||
-                         Version.GetType() == typeof(Steam_16_3_1_Windows) ||
-                         Version.GetType() == typeof(Steam_16_3_2_Windows))
-                    return 0x44;
-                else if (Version.GetType() == typeof(Steam_15_2_1_Windows))
-                    return 0x178;
-                else
-                    return 0x0;
+                return 0x80;
 			}
 		}
 
@@ -144,20 +64,7 @@ namespace FMScoutFramework.Core.Offsets
 		{
 			get
 			{
-                if (Version.GetType() == typeof(Steam_14_3_0_Linux) ||
-                    Version.GetType() == typeof(Steam_14_3_0_Mac) ||
-                    Version.GetType() == typeof(Steam_14_3_1_Linux) ||
-                    Version.GetType() == typeof(Steam_15_3_2_Mac) ||
-                    Version.GetType() == typeof(Steam_15_3_2_Windows))
-                    return 0x28;
-                else if (Version.GetType() == typeof(Steam_16_3_0_Windows) ||
-                         Version.GetType() == typeof(Steam_16_3_1_Windows) || 
-                         Version.GetType() == typeof(Steam_16_3_2_Windows))
-                    return 0x48;
-                else if (Version.GetType() == typeof(Steam_15_2_1_Windows))
-                    return 0x17C;
-                else
-                    return 0x194;
+				return 0x68;
 			}
 		}
 
@@ -165,20 +72,7 @@ namespace FMScoutFramework.Core.Offsets
 		{
 			get
 			{
-                if (Version.GetType() == typeof(Steam_14_3_0_Linux) ||
-                    Version.GetType() == typeof(Steam_14_3_0_Mac) ||
-                    Version.GetType() == typeof(Steam_14_3_1_Linux) ||
-                    Version.GetType() == typeof(Steam_15_3_2_Mac) ||
-                    Version.GetType() == typeof(Steam_15_3_2_Windows))
-                    return 0x2C;
-                else if (Version.GetType() == typeof(Steam_16_3_0_Windows) ||
-                         Version.GetType() == typeof(Steam_16_3_1_Windows) || 
-                         Version.GetType() == typeof(Steam_16_3_2_Windows))
-                    return 0x4C;
-                else if (Version.GetType() == typeof(Steam_15_2_1_Windows))
-                    return 0x180;
-                else
-                    return 0x198;
+                return 0x70;
 			}
 		}
 
@@ -186,43 +80,66 @@ namespace FMScoutFramework.Core.Offsets
 		{
 			get
 			{
-                if (Version.GetType() == typeof(Steam_14_3_0_Linux) ||
-                    Version.GetType() == typeof(Steam_14_3_0_Mac) ||
-                    Version.GetType() == typeof(Steam_14_3_1_Linux) ||
-                    Version.GetType() == typeof(Steam_15_3_2_Mac) ||
-                    Version.GetType() == typeof(Steam_15_3_2_Windows))
-                    return 0x54;
-                else if (Version.GetType() == typeof(Steam_16_3_0_Windows) ||
-                         Version.GetType() == typeof(Steam_16_3_1_Windows) ||
-                         Version.GetType() == typeof(Steam_16_3_2_Windows))
-
-                    return 0x74;
-                else if (Version.GetType() == typeof(Steam_15_2_1_Windows))
-                    return 0x1A8;
-                else
-                    return 0x1C4;
+				return 0xA8;
 			}
 		}
 
-		public short Club
-		{
-			get
-			{
-                if (Version.GetType() == typeof(Steam_14_3_0_Linux) ||
-                    Version.GetType() == typeof(Steam_14_3_0_Mac) ||
-                    Version.GetType() == typeof(Steam_14_3_1_Linux) ||
-                    Version.GetType() == typeof(Steam_15_3_2_Mac) ||
-                    Version.GetType() == typeof(Steam_15_3_2_Windows))
-                    return 0xBC;
-                else if (Version.GetType() == typeof(Steam_16_3_0_Windows) ||
-                         Version.GetType() == typeof(Steam_16_3_1_Windows) ||
-                         Version.GetType() == typeof(Steam_16_3_2_Windows))
-                    return 0x10;
-                else if (Version.GetType() == typeof(Steam_15_2_1_Windows))
-                    return 0x200;
-                else
-                    return 0x22C;
-			}
-		}
-	}
+		//public short Club
+		//{
+		//	get
+		//	{
+		//              if (Version.GetType() == typeof(Steam_16_3_2_Windows))
+		//                  return 0x10;
+		//              else
+		//                  return 0x22C;
+		//	}
+		//}
+		public short InternationalApps
+        {
+            get
+            {
+                return 0x134;
+            }
+        }
+
+        public short U21InternationalApps
+        {
+            get
+            {
+                return 0x138;
+            }
+        }
+
+        public short InternationalGoals
+        {
+            get
+            {
+                return 0x136;
+            }
+        }
+
+        public short U21InternationalGoals
+        {
+            get
+            {
+                return 0x13A;
+            }
+        }
+
+        public short RowID
+        {
+            get
+            {
+                return 0x8;
+            }
+        }
+
+        public short ID
+        {
+            get
+            {
+                return 0xC;
+            }
+        }
+    }
 }

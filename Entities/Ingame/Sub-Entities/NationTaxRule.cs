@@ -6,10 +6,10 @@ namespace FMScoutFramework.Core.Entities.InGame
 {
     public class NationTaxRule : BaseObject, INationTaxRule
     {
-        public NationTaxRule (int memoryAddress, IVersion version)
+        public NationTaxRule (Int64 memoryAddress, IVersion version)
             : base(memoryAddress, version)
         { }
-        public NationTaxRule (int memoryAddress, ArraySegment<byte> originalBytes, IVersion version)
+        public NationTaxRule (Int64 memoryAddress, ArraySegment<byte> originalBytes, IVersion version)
             : base(memoryAddress, originalBytes, version)
         { }
     }

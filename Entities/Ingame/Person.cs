@@ -11,18 +11,18 @@ namespace FMScoutFramework.Core.Entities.InGame
 	public class Person : BaseObject, IPerson
     {
 		public PersonOffsets PersonOffsets;
-		public Person (int memoryAddress, IVersion version) 
+		public Person (Int64 memoryAddress, IVersion version) 
 			: base(memoryAddress, version)
 		{
 			this.PersonOffsets = new PersonOffsets(version);
 		}
-		public Person (int memoryAddress, ArraySegment<byte> originalBytes, IVersion version) 
+		public Person (Int64 memoryAddress, ArraySegment<byte> originalBytes, IVersion version) 
 			: base(memoryAddress, originalBytes, version)
 		{
 			this.PersonOffsets = new PersonOffsets(version);
 		}
 
-		protected virtual int PersonAddress {
+		protected virtual Int64 PersonAddress {
 			get {
 				return (MemoryAddress + Version.PersonOffsets.Person);
 			}
@@ -30,7 +30,7 @@ namespace FMScoutFramework.Core.Entities.InGame
 
 		public DateTime DateOfBirth {
 			get {
-				return PropertyInvoker.Get<DateTime> (PersonOffsets.DateOfBirth, OriginalBytes, PersonAddress, DatabaseMode);
+				return PropertyInvoker.Get<DateTime>(PersonOffsets.DateOfBirth, OriginalBytes, PersonAddress, DatabaseMode);
 			}
             set
             {
@@ -40,7 +40,7 @@ namespace FMScoutFramework.Core.Entities.InGame
 
 		public int Age {
 			get {
-				DateTime now = DateTime.Today;
+				DateTime now = DateTime.Today; //  TODO: should be in relation to game date, not real life date
 				int age = now.Year - DateOfBirth.Year;
 				if (DateOfBirth > now.AddYears (-age))
 					age--;
@@ -50,7 +50,7 @@ namespace FMScoutFramework.Core.Entities.InGame
 
 		public string Fullname {
 			get {
-				return PropertyInvoker.GetString (PersonOffsets.Fullname, -1, OriginalBytes, PersonAddress, DatabaseMode);
+				return PropertyInvoker.GetString(PersonOffsets.Fullname, -1, OriginalBytes, PersonAddress, DatabaseMode);
 			}
 		}
 
@@ -72,29 +72,80 @@ namespace FMScoutFramework.Core.Entities.InGame
 			}
 		}
 
-		public Nation Nationality {
-			get {
-				return PropertyInvoker.GetPointer<Nation> (PersonOffsets.Nationality, OriginalBytes, PersonAddress, DatabaseMode, Version);
+		public Nation Nationality
+		{
+			get
+			{
+				return PropertyInvoker.GetPointer<Nation>(PersonOffsets.Nationality, OriginalBytes, PersonAddress, DatabaseMode, Version);
 			}
 		}
 
 		public PersonAttributes Attributes {
 			get {
-				int AttributesAddress = PersonAddress + PersonOffsets.Attributes;
+                Int64 AttributesAddress = PersonAddress + PersonOffsets.Attributes;
 				return new PersonAttributes (AttributesAddress, Version);
 			}
 		}
 
-		public Contract Contract {
-			get {
-				return PropertyInvoker.GetPointer<Contract> (PersonOffsets.Contract, OriginalBytes, PersonAddress, DatabaseMode, Version);
+		public Contract Contract
+		{
+			get
+			{
+				return PropertyInvoker.GetPointer<Contract>(PersonOffsets.Contract, OriginalBytes, PersonAddress, DatabaseMode, Version);
 			}
 		}
 
-		public Club Club {
-			get {
-				return PropertyInvoker.GetPointer<Club> (PersonOffsets.Club, OriginalBytes, PersonAddress, DatabaseMode, Version);
-			}
-		}
-	}
+		//public Club Club {
+		//	get {
+		//		return PropertyInvoker.GetPointer<Club> (PersonOffsets.Club, OriginalBytes, PersonAddress, DatabaseMode, Version);
+		//	}
+		//}
+		public int RowID
+        {
+            get
+            {
+                return PropertyInvoker.Get<Int32>(PersonOffsets.RowID, OriginalBytes, PersonAddress, DatabaseMode);
+            }
+        }
+
+        public int ID
+        {
+            get
+            {
+                return PropertyInvoker.Get<Int32>(PersonOffsets.ID, OriginalBytes, PersonAddress, DatabaseMode);
+            }
+        }
+
+        public byte InternationalApps
+        {
+            get
+            {
+                return PropertyInvoker.Get<byte>(PersonOffsets.InternationalApps, OriginalBytes, PersonAddress, DatabaseMode);
+            }
+        }
+
+        public byte U21InternationalApps
+        {
+            get
+            {
+                return PropertyInvoker.Get<byte>(PersonOffsets.U21InternationalApps, OriginalBytes, PersonAddress, DatabaseMode);
+            }
+        }
+
+        public byte InternationalGoals
+        {
+            get
+            {
+                return PropertyInvoker.Get<byte>(PersonOffsets.InternationalGoals, OriginalBytes, PersonAddress, DatabaseMode);
+            }
+        }
+
+        public byte U21InternationalGoals
+        {
+            get
+            {
+                return PropertyInvoker.Get<byte>(PersonOffsets.U21InternationalGoals, OriginalBytes, PersonAddress, DatabaseMode);
+            }
+        }
+    }
 }

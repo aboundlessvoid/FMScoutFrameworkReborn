@@ -12,9 +12,9 @@ namespace FMScoutFramework.Core
 	{
 		public Process Process { get; set; }
 		public IntPtr Pointer { get; set; }
-		public int EndPoint { get; set; }
-		public int BaseAddress { get; set; }
+		public Int64 EndPoint { get; set; }
+		public Int64 BaseAddress { get; set; }
 		public string VersionDescription { get; set; }
-		public int HeapAddress { get; set; }
+		public Int64 HeapAddress { get; set; }
 	}
 }

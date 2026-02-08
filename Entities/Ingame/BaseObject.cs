@@ -7,19 +7,19 @@ namespace FMScoutFramework.Core.Entities.InGame
 {
 	public class BaseObject
 	{
-		public int MemoryAddress;
+		public Int64 MemoryAddress;
 		public ArraySegment<byte> OriginalBytes;
 		public IVersion Version;
 		public DatabaseModeEnum DatabaseMode;
 
-		public BaseObject (int memoryAddress, IVersion version)
+		public BaseObject (Int64 memoryAddress, IVersion version)
 		{
 			MemoryAddress = memoryAddress;
 			Version = version;
 			DatabaseMode = DatabaseModeEnum.Realtime;
 		}
 
-		public BaseObject(int memoryAddress, ArraySegment<byte> originalBytes, IVersion version)
+		public BaseObject(Int64 memoryAddress, ArraySegment<byte> originalBytes, IVersion version)
 		{
 			MemoryAddress = memoryAddress;
 			OriginalBytes = originalBytes;

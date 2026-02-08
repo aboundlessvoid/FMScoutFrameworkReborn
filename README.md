@@ -10,6 +10,7 @@ The non-exhaustive list of things done and still to do is as follows:
 - [x] get all the memory-reading code to 64-bit support
 - [x] find basic offsets to access all the central lists (Players, Clubs, etc.)
 - [ ] get the offsets for the basic objects up to date -> partially finished for Persons/Players, Continents, Nations, Contracts
+- [ ] switch to a modern .NET version
 - [ ] set up some basic automated testing (load a known save file, find specific objects, make sure the values are interpreted correctly; low priority at the moment)
 - [ ] support for OSes besides Windows (low priority at the moment)
 

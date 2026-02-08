@@ -1,7 +1,19 @@
-# FMScoutFramework  
-[![Build Status](https://travis-ci.org/ThanosSiopoudis/FMScoutFramework.svg)](https://travis-ci.org/ThanosSiopoudis/FMScoutFramework)
+# FMScoutFramework Reborn
 
-FMScoutFramework is a C#.NET/Mono Framework that enables you to create your own assistant tools / editors for Football Manager. It supports FM2014, FM2015 and FM2016
+FMScoutFramework Reborn is a C#.NET/Mono Framework that enables you to create your own assistant tools / editors for Football Manager. It supports FM 26.
+
+## Current Status
+
+This is a complete rewrite based on [FMScoutFramework](https://github.com/ThanosSiopoudis/FMScoutFramework), which was only publicly released until FM16. Since the game has gone through a switch to 64 bit architecture and an engine change since then, there is a lot to go through to make everything work again.
+
+The non-exhaustive list of things done and still to do is as follows:
+- [x] get all the memory-reading code to 64-bit support
+- [x] find basic offsets to access all the central lists (Players, Clubs, etc.)
+- [ ] get the offsets for the basic objects up to date -> partially finished for Persons/Players, Continents, Nations, Contracts
+- [ ] set up some basic automated testing (load a known save file, find specific objects, make sure the values are interpreted correctly; low priority at the moment)
+- [ ] support for OSes besides Windows (low priority at the moment)
+
+As of right now, the library can successfully load game data from FM 26 on Windows, but you will only receive a list of players, continents and nations in the opened savegame, with some data still missing in those objects.
 
 ## Project Setup
 
@@ -73,17 +85,10 @@ var clubs = (from c in fmCore.Clubs
 			       select c).Take (100).ToList ();
 ```
 
-## Currently pending
-* Add Offsets for FM2016 OS X
-* Add a bunch of properties for the entities already implemented
-* Add a LOT of entities and properties for objects we have their main addresses for (look in 15.3.2 Windows version file)
-
 ## Contributing changes
-We need more devs and support! Imagine all the tools you could create for FM2014/FM2015/FM2016 if everything was already implemented!
-* Fork the project, make/test your changes and send a Pull Request!
-* Alternatively, bug reporting is vital! Use the Github's Issues page to do that!
+Since this is currently my personal attempt to establish a solid baseline that makes this library usable and useful for other tools to be built on top of it, I'm currently not looking for contributions until I have at least a clean state that successfully loads Players, Staff and Clubs with a sensible amount of implemented attributes. Once this is achieved, I'm happy about any contributions.
 
 ## License
 
-FMScoutFramework is released under the GNU General Public License v2.0
+FMScoutFramework Reborn is released under the GNU General Public License v2.0
 Please read the LICENSE file for a full version of the License

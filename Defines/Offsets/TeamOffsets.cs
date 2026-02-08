@@ -12,36 +12,16 @@ namespace FMScoutFramework.Core.Offsets
             this.Version = version;
         }
 
-		public const short RowID				= 0x4;
-		public const short ID					= 0x8;
-		public const short Club					= 0x10;
-		public const short PreviousReputation	= 0x1A;
-		public const short TeamType 			= 0x1C;
-		public const short Manager				= 0x4C;
-
-        public short Players
-        {
-            get
-            {
-                return 0x0; // TODO
-            }
-        }
-
-        public short Stadium
-        {
-            get
-            {
-                return 0x0; // TODO
-            }
-        }
-
-        public short Reputation
-        {
-            get
-            {
-                return 0x0; // TODO
-            }
-        }
-	}
+		public const short RowID = 0x8;
+		public const short ID = 0xC;
+		public const short RandomID = 0x10;
+		public const short Club	= 0x30;
+		//public const short PreviousReputation = 0x0;
+		public const short TeamType = 0x28;
+		//public const short Manager = 0x0;
+        public const short Players = 0x38;
+        //public const short Stadium = 0x0;
+        public const short Reputation = 0xA8;
+    }
 }
 

@@ -57,7 +57,13 @@ namespace FMScoutFramework.Core.Entities.GameVersions
             public Int64 Person { get { return 0x0; } }
             [MemoryAddressAttribute(CountLength = 8, BytesToSkip = 0x28)]
             public Int64 Nation { get { return 0x0; } }
-            public Int64 CurrentDateTime { get { return 0x0; } } // TODO:
+            [MemoryAddressAttribute(CountLength = 8, BytesToSkip = 0x8)]
+            public Int64 City { get { return 0x0; } }
+            [MemoryAddressAttribute(CountLength = 8, BytesToSkip = 0x10)]
+            public Int64 Club { get { return 0x0; } }
+            [MemoryAddressAttribute(CountLength = 8, BytesToSkip = 0x98)]
+            public Int64 Team { get { return 0x0; } }
+            public Int64 CurrentDateTime { get { return 0x04D8C9D8; } } // TODO: not sure if this is stable
         }
         public class VersionPersonEnumPointers : IVersionPersonEnumPointers
         {

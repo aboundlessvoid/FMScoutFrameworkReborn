@@ -3,12 +3,17 @@
     public interface IClub
     {
         Nation BasedNation { get; }
-        ClubFinances ClubFinances { get; }
-        int ClubFinancesAddress { get; }
+        Nation ContinentalCupNation { get; }
+        City City { get; }
+        //ClubFinances ClubFinances { get; } TODO
+        //int ClubFinancesAddress { get; }
         int ID { get; }
-        string Name { get; }
+        int RowID { get; }
+        int RandomID { get; }
+        string FullName { get; }
         Nation Nation { get; }
         string ShortName { get; }
+        string SixLetterName { get; }
         Team[] Teams { get; }
     }
 }

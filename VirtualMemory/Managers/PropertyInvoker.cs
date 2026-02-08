@@ -23,7 +23,9 @@ namespace FMScoutFramework.Core.Managers
 					return (T)(object)ProcessManager.ReadDateTime (offsetToFind);
 				else if (typeof(Int32) == typeof(T))
 					return (T)(object)ProcessManager.ReadInt32 (offsetToFind);
-				else if (typeof(SByte) == typeof(T))
+                else if (typeof(Int64) == typeof(T))
+                    return (T)(object)ProcessManager.ReadInt64(offsetToFind);
+                else if (typeof(SByte) == typeof(T))
 					return (T)(object)ProcessManager.ReadSByte (offsetToFind);
 				else if (typeof(float) == typeof(T))
 					return (T)(object)ProcessManager.ReadFloat (offsetToFind);
@@ -31,8 +33,10 @@ namespace FMScoutFramework.Core.Managers
 					return (T)(object)ProcessManager.ReadUInt32 (offsetToFind);
 				else if (typeof(ushort) == typeof(T))
 					return (T)(object)ProcessManager.ReadUInt16 (offsetToFind);
-				else
-					return default(T);
+                else if (typeof(UInt64) == typeof(T))
+                    return (T)(object)ProcessManager.ReadUInt64(offsetToFind);
+                else
+                    return default(T);
 			}
 		}
 
@@ -81,7 +85,7 @@ namespace FMScoutFramework.Core.Managers
         }
 
         private static Dictionary<Type, Func<Int64, IVersion, object>> pointerDelegateDictionary = new Dictionary<Type, Func<Int64, IVersion, object>>();
-		public static T GetPointer<T>(int offset, ArraySegment<byte> baseObject, Int64 memoryAddress, DatabaseModeEnum databaseMode, IVersion version)
+		public static T GetPointer<T>(int offset, ArraySegment<byte> baseObject, Int64 memoryAddress, DatabaseModeEnum databaseMode, IVersion version, int pointerOffset = 0x0)
 			where T: class
 		{
 			if (databaseMode == DatabaseModeEnum.Cached) {
@@ -116,7 +120,7 @@ namespace FMScoutFramework.Core.Managers
 						}
 					}
 				}
-				return (T)pointerDelegateDictionary [typeof(T)].Invoke (ProcessManager.ReadInt64 (memAddress), version);
+				return (T)pointerDelegateDictionary [typeof(T)].Invoke (ProcessManager.ReadInt64 (memAddress) + pointerOffset, version);
 			}
 		}
 

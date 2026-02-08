@@ -23,6 +23,14 @@ namespace FMScoutFramework.Core.Entities.InGame
             }
         }
 
+		public int RandomID
+        {
+            get
+            {
+                return PropertyInvoker.Get<Int32>(CityOffsets.RandomID, OriginalBytes, MemoryAddress, DatabaseMode);
+            }
+        }
+
         public int RowID
         {
             get

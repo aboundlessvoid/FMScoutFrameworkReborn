@@ -9,5 +9,10 @@
         float Longitude { get; }
         string Name { get; }
         Nation Nation { get; }
+        int RowID { get; }
+        int RandomID { get; }
+        //InhabitantRange Inhabitants { get; }
+        //Weather Weather { get; }
+        //LocalRegion LocalRegion { get; }
     }
 }

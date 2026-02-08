@@ -30,9 +30,9 @@ namespace FMScoutFrameworkTest
         public void GameLoaded()
         {
             Debug.WriteLine("Load Done");
-            foreach (var item in fmCore.Players)
+            foreach (var item in fmCore.Clubs)
             {
-                Debug.WriteLine(item.Nickname + " " + item.Lastname + " " + item.DateOfBirth);
+                Debug.WriteLine(item.Teams);
             }
         }
     }

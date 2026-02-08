@@ -33,6 +33,13 @@ namespace FMScoutFramework.Core.Entities.InGame
 			}
 		}
 
+		public Int32 RandomID
+        { 
+			get {
+				return PropertyInvoker.Get<Int32> (ClubOffsets.RandomID, OriginalBytes, MemoryAddress, DatabaseMode);
+			}
+		}
+
 		public Team[] Teams {
 			get {
 				long teamCount = ProcessManager.ReadArrayLength (MemoryAddress + ClubOffsets.Teams);
@@ -47,9 +54,9 @@ namespace FMScoutFramework.Core.Entities.InGame
 			}
 		}
 
-		public string Name { 
+		public string FullName { 
 			get {
-				return PropertyInvoker.GetString (ClubOffsets.Name, -1, OriginalBytes, MemoryAddress, DatabaseMode);
+				return PropertyInvoker.GetString (ClubOffsets.FullName, -1, OriginalBytes, MemoryAddress, DatabaseMode);
 			}
 		}
 
@@ -59,34 +66,23 @@ namespace FMScoutFramework.Core.Entities.InGame
 			}
 		}
 
-        /*
-		private int SixLetterNameAddress {
+		public string SixLetterName
+        {
 			get {
-				return PropertyInvoker.Get<Int32> (ClubOffsets.SixLetterName, OriginalBytes, MemoryAddress, DatabaseMode);
+				return PropertyInvoker.GetString (ClubOffsets.SixLetterName, 0, OriginalBytes, MemoryAddress, DatabaseMode);
 			}
 		}
 
-		public string SixLetterName {
+		public City City
+        {
 			get {
-				return PropertyInvoker.GetString (0x0, 0, OriginalBytes, this.SixLetterNameAddress, DatabaseMode);
-			}
-		} */
-
-		private int NationAddress {
-			get {
-				return PropertyInvoker.Get<Int32> (ClubOffsets.Nation, OriginalBytes, MemoryAddress, DatabaseMode);
-			}
-		}
+                return PropertyInvoker.GetPointer<City>(ClubOffsets.City, OriginalBytes, MemoryAddress, DatabaseMode, Version);
+            }
+        }
 
 		public Nation Nation {
 			get {
 				return PropertyInvoker.GetPointer<Nation> (ClubOffsets.Nation, OriginalBytes, MemoryAddress, DatabaseMode, Version);
-			}
-		}
-
-		private int BasedNationAddress {
-			get {
-				return PropertyInvoker.Get<Int32> (ClubOffsets.BasedNation, OriginalBytes, MemoryAddress, DatabaseMode);
 			}
 		}
 
@@ -96,21 +92,29 @@ namespace FMScoutFramework.Core.Entities.InGame
 			}
 		}
 
-		public int ClubFinancesAddress {
-			get {
-				return PropertyInvoker.Get<Int32> (ClubOffsets.ClubFinances, OriginalBytes, MemoryAddress, DatabaseMode);
-			}
-		}
+		//public int ClubFinancesAddress {
+		//	get {
+		//		return PropertyInvoker.Get<Int32> (ClubOffsets.ClubFinances, OriginalBytes, MemoryAddress, DatabaseMode);
+		//	}
+		//}
 
-		public ClubFinances ClubFinances {
-			get {
-				return PropertyInvoker.GetPointer<ClubFinances> (ClubOffsets.ClubFinances, OriginalBytes, MemoryAddress, DatabaseMode, Version);
-			}
-		}
+		//public ClubFinances ClubFinances {
+		//	get {
+		//		return PropertyInvoker.GetPointer<ClubFinances> (ClubOffsets.ClubFinances, OriginalBytes, MemoryAddress, DatabaseMode, Version);
+		//	}
+		//}
 
-		public override string ToString ()
+		public Nation ContinentalCupNation
 		{
-			return Name;
+            get
+            {
+                return PropertyInvoker.GetPointer<Nation>(ClubOffsets.ContinentalCupNation, OriginalBytes, MemoryAddress, DatabaseMode, Version);
+            }
+        }
+
+        public override string ToString ()
+		{
+			return FullName;
 		}
 	}
 }

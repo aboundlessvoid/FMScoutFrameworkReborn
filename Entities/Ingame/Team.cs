@@ -34,9 +34,10 @@ namespace FMScoutFramework.Core.Entities.InGame
 			}
 		}
 
-		private Int64 ClubAddress {
+		public int RandomID
+        {
 			get {
-				return PropertyInvoker.Get<Int64> (TeamOffsets.Club, OriginalBytes, MemoryAddress, DatabaseMode);
+				return PropertyInvoker.Get<Int32> (TeamOffsets.RandomID, OriginalBytes, MemoryAddress, DatabaseMode);
 			}
 		}
 
@@ -46,11 +47,26 @@ namespace FMScoutFramework.Core.Entities.InGame
 			}
 		}
 
-		private short PreviousReputation {
+		public Player[] Players {
 			get {
-				return PropertyInvoker.Get<Int16> (TeamOffsets.PreviousReputation, OriginalBytes, MemoryAddress, DatabaseMode);
+                long playerCount = ProcessManager.ReadArrayLength(MemoryAddress + TeamOffsets.Players);
+                Player[] result = new Player[playerCount];
+
+                for (int i = 0; i < playerCount; i++)
+                {
+                    Int64 playerAddress = PropertyInvoker.Get<Int64>(TeamOffsets.Players, OriginalBytes, MemoryAddress, DatabaseMode);
+                    result[i] = PropertyInvoker.GetPointer<Player>(0x0, OriginalBytes, (playerAddress + (i * 8)), DatabaseMode, Version, -Version.PersonOffsets.Player);
+                }
+
+				return result;
 			}
 		}
+
+		//private short PreviousReputation {
+		//	get {
+		//		return PropertyInvoker.Get<Int16> (TeamOffsets.PreviousReputation, OriginalBytes, MemoryAddress, DatabaseMode);
+		//	}
+		//}
 
 		public TeamType TeamType {
 			get {
@@ -61,19 +77,20 @@ namespace FMScoutFramework.Core.Entities.InGame
 		public ushort Reputation {
 			get
 			{
-					return 0;
-			}
+                return PropertyInvoker.Get<UInt16>(TeamOffsets.Reputation, OriginalBytes, MemoryAddress, DatabaseMode);
+            }
 		}
 
 		public override string ToString ()
 		{
-			if (this.Club.Name != "-")
-				return string.Format ("{0} ({1})", this.Club.Name, this.TeamType.ToString());
+			if (this.Club.FullName != "-")
+				return string.Format ("{0} ({1})", this.Club.FullName, this.TeamType.ToString());
 			else 
 				return "-";
 		}
 	}
 
+	// TODO: check and update
 	public enum TeamType {
 		First 				= 0,
 		Reserves 			= 1,

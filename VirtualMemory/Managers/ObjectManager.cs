@@ -48,11 +48,12 @@ namespace FMScoutFramework.Core.Managers
 
 			ObjectStore.Add (typeof(Continent), RetrieveObjects<Continent> (m => m.Continent, m => m.Continent));
 			ObjectStore.Add (typeof(Nation), RetrieveObjects<Nation>(m => m.Nation, m => m.Nation));
-			//ObjectStore.Add (typeof(City), RetrieveObjects<City> (m => m.City, m => m.City));
-			//ObjectStore.Add (typeof(Club), RetrieveObjects<Club> (m => m.Club, m => m.Club));
+			ObjectStore.Add (typeof(City), RetrieveObjects<City> (m => m.City, m => m.City));
+			ObjectStore.Add (typeof(Club), RetrieveObjects<Club> (m => m.Club, m => m.Club));
+            ObjectStore.Add (typeof(Team), RetrieveObjects<Team> (m => m.Team, m => m.Team));
 
-			#region People
-			ObjectStore.Add (typeof(Player), RetrieveObjects<Player> (staffAddresses.PlayerAddresses));
+            #region People
+            ObjectStore.Add (typeof(Player), RetrieveObjects<Player> (staffAddresses.PlayerAddresses));
 			//ObjectStore.Add (typeof(Staff), RetrieveObjects<Staff> (staffAddresses.StaffAddresses));
 			//ObjectStore.Add (typeof(PlayerStaff), RetrieveObjects<PlayerStaff>(staffAddresses.PlayerStaffAddresses));
 			#endregion

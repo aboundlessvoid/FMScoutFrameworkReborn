@@ -10,11 +10,11 @@ namespace FMScoutFramework.Core.Entities.GameVersions
         Int64 XorDistance { get; }
         int StringOffset { get; }
 
-		//[MemoryAddress(CountLength = 4, BytesToSkip = 0x28)]
-		//      Int64 City { get; }
+		[MemoryAddress(CountLength = 4, BytesToSkip = 0x28)]
+		Int64 City { get; }
 
-		//[MemoryAddressAttribute(CountLength = 4, BytesToSkip = 0x28)]
-		//      Int64 Club { get; }
+		[MemoryAddressAttribute(CountLength = 4, BytesToSkip = 0x28)]
+		Int64 Club { get; }
 
 		[MemoryAddressAttribute(CountLength = 4, BytesToSkip = 0x28)]
 		Int64 Continent { get; }
@@ -32,8 +32,8 @@ namespace FMScoutFramework.Core.Entities.GameVersions
 		//      [MemoryAddressAttribute(CountLength = 4, BytesToSkip = 0x28)]
 		//      Int64 Stadium { get; }
 
-		//[MemoryAddressAttribute(CountLength = 4, BytesToSkip = 0x28)]
-		//      Int64 Team { get; }
+		[MemoryAddressAttribute(CountLength = 4, BytesToSkip = 0x28)]
+		Int64 Team { get; }
 
 		[MemoryAddressAttribute(CountLength = 4, BytesToSkip = 0x28)]
 		Int64 Person { get; }

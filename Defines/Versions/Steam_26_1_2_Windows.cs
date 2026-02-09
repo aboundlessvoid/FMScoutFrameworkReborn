@@ -84,7 +84,7 @@ namespace FMScoutFramework.Core.Entities.GameVersions
         {
             public int Person { get { return 0x0; } }
             public int Player { get { return -0x288; } }
-            public int Staff { get { return 0x0; } }
+            public int Staff { get { return -0x100; } }
             public int NonPlayer { get { return 0x0; } }
             public int HumanManager { get { return 0x0; } }
             public int PlayerStaff { get { return 0x0; } }

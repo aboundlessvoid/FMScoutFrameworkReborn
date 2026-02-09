@@ -51,7 +51,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Defines\Offsets\ContinentOffsets.cs" />
+    <Compile Include="Defines\Offsets\PersonTypes\Sub-Entities\JobAttributesOffsets.cs" />
     <Compile Include="Defines\Versions\Steam_26_1_2_Windows.cs" />
+    <Compile Include="Entities\Ingame\Interfaces\IJobAttributes.cs" />
+    <Compile Include="Entities\Ingame\JobAttributes.cs" />
     <Compile Include="FMCore.cs" />
     <Compile Include="Attributes\MemoryAddressAttribute.cs" />
     <Compile Include="Converters\DateConverter.cs" />

@@ -54,7 +54,7 @@ namespace FMScoutFramework.Core.Managers
 
             #region People
             ObjectStore.Add (typeof(Player), RetrieveObjects<Player> (staffAddresses.PlayerAddresses));
-			//ObjectStore.Add (typeof(Staff), RetrieveObjects<Staff> (staffAddresses.StaffAddresses));
+			ObjectStore.Add (typeof(Staff), RetrieveObjects<Staff> (staffAddresses.StaffAddresses));
 			//ObjectStore.Add (typeof(PlayerStaff), RetrieveObjects<PlayerStaff>(staffAddresses.PlayerStaffAddresses));
 			#endregion
 		}

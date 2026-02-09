@@ -8,7 +8,7 @@ namespace FMScoutFramework.Core.Entities.InGame
 {
 	public class Staff : Person, IStaff
     {
-		private StaffOffsets StaffOffsets;
+		private readonly StaffOffsets StaffOffsets;
 		public Staff (Int64 memoryAddress, IVersion version) 
 			: base(memoryAddress, version)
 		{	
@@ -22,7 +22,7 @@ namespace FMScoutFramework.Core.Entities.InGame
 
 		protected override Int64 PersonAddress {
 			get {
-				return StaffAddress + StaffOffsets.PersonAddress;
+				return MemoryAddress;
 			}
 		}
 
@@ -32,17 +32,60 @@ namespace FMScoutFramework.Core.Entities.InGame
 			}
 		}
 
-		public Int32 ID {
+        public short CurrentReputation
+		{
 			get {
-				return PropertyInvoker.Get<Int32>(StaffOffsets.ID, OriginalBytes, StaffAddress, DatabaseMode);
+				return PropertyInvoker.Get<short>(StaffOffsets.CurrentReputation, OriginalBytes, StaffAddress, DatabaseMode);
 			}
 		}
 
-		public Int32 RowID {
+        public short HomeReputation
+        {
 			get {
-				return PropertyInvoker.Get<Int32>(StaffOffsets.RowID, OriginalBytes, StaffAddress, DatabaseMode);
+				return PropertyInvoker.Get<short>(StaffOffsets.HomeReputation, OriginalBytes, StaffAddress, DatabaseMode);
 			}
 		}
-	}
+
+        public short WorldReputation
+        {
+			get {
+				return PropertyInvoker.Get<short>(StaffOffsets.WorldReputation, OriginalBytes, StaffAddress, DatabaseMode);
+			}
+		}
+
+        public ushort CA
+        {
+            get
+            {
+                return PropertyInvoker.Get<ushort>(StaffOffsets.CA, OriginalBytes, StaffAddress, DatabaseMode);
+            }
+            set
+            {
+                PropertyInvoker.Set<ushort>(StaffOffsets.CA, OriginalBytes, StaffAddress, DatabaseMode, value);
+            }
+        }
+
+        public ushort PA
+        {
+            get
+            {
+                return PropertyInvoker.Get<ushort>(StaffOffsets.PA, OriginalBytes, StaffAddress, DatabaseMode);
+            }
+            set
+            {
+                PropertyInvoker.Set<ushort>(StaffOffsets.PA, OriginalBytes, StaffAddress, DatabaseMode, value);
+            }
+        }
+
+        public JobAttributes JobAttributes
+        {
+            get
+            {
+                long startAddress = StaffAddress + StaffOffsets.JobAttributes;
+                return new JobAttributes(startAddress, Version);
+            }
+        }
+
+    }
 }
 

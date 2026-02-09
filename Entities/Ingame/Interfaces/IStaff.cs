@@ -2,6 +2,11 @@
 {
     public interface IStaff
     {
-        int ID { get; }
+        short CurrentReputation { get; }
+        short HomeReputation { get; }
+        short WorldReputation { get; }
+        ushort CA { get; }
+        ushort PA { get; }
+        JobAttributes JobAttributes { get; }
     }
 }

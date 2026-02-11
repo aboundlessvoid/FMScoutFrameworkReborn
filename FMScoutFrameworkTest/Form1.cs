@@ -23,8 +23,11 @@ namespace FMScoutFrameworkTest
 
         private void button1_Click(object sender, EventArgs e)
         {
-            fmCore.GameLoaded += new Action(GameLoaded);
-            new Action(() => fmCore.LoadData()).BeginInvoke((s) => { }, null);
+            // subscription
+            fmCore.GameLoaded += GameLoaded;
+
+            // start background work
+            Task.Run(() => fmCore.LoadData());
         }
 
         public void GameLoaded()

@@ -1,33 +1,7 @@
-﻿using System.Reflection;
-using System.Runtime.CompilerServices;
-using System.Runtime.InteropServices;
-
-// General Information about an assembly is controlled through the following 
-// set of attributes. Change these attribute values to modify the information
-// associated with an assembly.
-[assembly: AssemblyTitle("FMScoutFramework Reborn")]
-[assembly: AssemblyDescription("A Football Manager cross platform Scout and Editor framework")]
-[assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("aboundlessvoid")]
-[assembly: AssemblyProduct("FMScoutFramework Reborn")]
-[assembly: AssemblyCopyright("Original Copyright: Thanos Siopoudis 2014-2016, Modifications: aboundlessvoid 2026")]
-[assembly: AssemblyTrademark("")]
-[assembly: AssemblyCulture("")]
-
-// Setting ComVisible to false makes the types in this assembly not visible 
-// to COM components.  If you need to access a type in this assembly from 
-// COM, set the ComVisible attribute to true on that type.
-[assembly: ComVisible(false)]
-
-// The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("251e6e37-670e-4836-888f-deff3a1d1194")]
-
-// Version information for an assembly consists of the following four values:
+﻿// Assembly attributes were previously defined here for older project format.
+// In SDK-style projects the compiler may generate these attributes automatically.
+// To avoid duplicate attribute errors the explicit attributes were removed.
+// If you need to keep custom assembly attributes, re-add them here selectively.
 //
-//      Major Version
-//      Minor Version 
-//      Build Number
-//      Revision
-//
-[assembly: AssemblyVersion("1.0.0.0")]
-[assembly: AssemblyFileVersion("1.0.0.0")]
+// Example (uncomment to restore a single attribute):
+// [assembly: System.Reflection.AssemblyTitle("FMScoutFramework Reborn")]

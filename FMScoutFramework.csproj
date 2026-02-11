@@ -1,37 +1,41 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Linux-Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{E74FE82A-2E12-4C51-AD24-7D2DDE5C36A6}</ProjectGuid>
-    <OutputType>Library</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
     <RootNamespace>FMScoutFramework</RootNamespace>
     <AssemblyName>FMScoutFramework</AssemblyName>
-    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
-    <TargetFrameworkProfile />
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <GenerateAssemblyVersionAttribute>false</GenerateAssemblyVersionAttribute>
+    <GenerateAssemblyFileVersionAttribute>false</GenerateAssemblyFileVersionAttribute>
+    <GenerateAssemblyTitleAttribute>false</GenerateAssemblyTitleAttribute>
+    <GenerateAssemblyDescriptionAttribute>false</GenerateAssemblyDescriptionAttribute>
+    <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
+    <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
+    <GenerateAssemblyCopyrightAttribute>false</GenerateAssemblyCopyrightAttribute>
+    <GenerateAssemblyTrademarkAttribute>false</GenerateAssemblyTrademarkAttribute>
+    <GenerateAssemblyCultureAttribute>false</GenerateAssemblyCultureAttribute>
+    <GenerateComVisibleAttribute>false</GenerateComVisibleAttribute>
+    <GenerateGuidAttribute>false</GenerateGuidAttribute>
+    <ProduceReferenceAssembly>false</ProduceReferenceAssembly>
   </PropertyGroup>
+
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Linux-Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\Debug</OutputPath>
     <DefineConstants>DEBUG;LINUX;</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <ConsolePause>false</ConsolePause>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
-    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
+
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Linux-Release|AnyCPU' ">
     <Optimize>true</Optimize>
     <OutputPath>bin\Release</OutputPath>
     <DefineConstants>RELEASE;LINUX;</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <ConsolePause>false</ConsolePause>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
-    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
+
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Windows-Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
     <Optimize>false</Optimize>
@@ -39,98 +43,26 @@
     <DefineConstants>DEBUG;WINDOWS;</DefineConstants>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Windows-Release|AnyCPU' ">
     <Optimize>true</Optimize>
     <OutputPath>bin\Windows-Release</OutputPath>
     <DefineConstants>RELEASE;WINDOWS;</DefineConstants>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+
+  <!-- Rely on SDK implicit Compile items. Removed explicit Compile Include to avoid duplicates. -->
+
+  <!-- Exclude test project and other external folders from this library's implicit compilation. -->
   <ItemGroup>
-    <Reference Include="System" />
-    <Reference Include="System.Configuration" />
+    <Compile Remove="FMScoutFrameworkTest\**\*.cs" />
   </ItemGroup>
+
   <ItemGroup>
-    <Compile Include="Defines\Offsets\ContinentOffsets.cs" />
-    <Compile Include="Defines\Offsets\PersonTypes\Sub-Entities\JobAttributesOffsets.cs" />
-    <Compile Include="Defines\Versions\Steam_26_1_2_Windows.cs" />
-    <Compile Include="Entities\Ingame\Interfaces\IJobAttributes.cs" />
-    <Compile Include="Entities\Ingame\JobAttributes.cs" />
-    <Compile Include="FMCore.cs" />
-    <Compile Include="Attributes\MemoryAddressAttribute.cs" />
-    <Compile Include="Converters\DateConverter.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Defines\Versions\IPersonVersionOffsets.cs" />
-    <Compile Include="Defines\Versions\IVersion.cs" />
-    <Compile Include="Defines\Versions\IVersionMemoryAddresses.cs" />
-    <Compile Include="Defines\Versions\IVersionPersonEnumPointers.cs" />
-    <Compile Include="Defines\FMProcess.cs" />
-    <Compile Include="Defines\Offsets\CityOffsets.cs" />
-    <Compile Include="Defines\Offsets\ClubOffsets.cs" />
-    <Compile Include="Defines\Offsets\NationOffsets.cs" />
-    <Compile Include="Defines\Offsets\TeamOffsets.cs" />
-    <Compile Include="Defines\Offsets\InjuryOffsets.cs" />
-    <Compile Include="Defines\Offsets\PersonOffsets.cs" />
-    <Compile Include="Defines\Offsets\PersonTypes\PlayerOffsets.cs" />
-    <Compile Include="Defines\Offsets\PersonTypes\Sub-Entities\PlayerStatsOffsets.cs" />
-    <Compile Include="Defines\Offsets\PersonTypes\Sub-Entities\PersonAttributesOffsets.cs" />
-    <Compile Include="Defines\Offsets\PersonTypes\Sub-Entities\ContractOffsets.cs" />
-    <Compile Include="Defines\Offsets\PersonTypes\Sub-Entities\ContractClausesOffsets.cs" />
-    <Compile Include="Defines\Offsets\PersonTypes\Sub-Entities\ContractBonusOffsets.cs" />
-    <Compile Include="Defines\Offsets\PersonTypes\StaffOffsets.cs" />
-    <Compile Include="Defines\Offsets\Sub-Entities\ClubFinancesOffsets.cs" />
-    <Compile Include="Defines\Offsets\Sub-Entities\RivalNationOffsets.cs" />
-    <Compile Include="Defines\Offsets\Sub-Entities\NationTaxRulesOffsets.cs" />
-    <Compile Include="Entities\Global.cs" />
-    <Compile Include="Entities\Ingame\BaseObject.cs" />
-    <Compile Include="Entities\Ingame\City.cs" />
-    <Compile Include="Entities\Ingame\Club.cs" />
-    <Compile Include="Entities\Ingame\ClubFinances.cs" />
-    <Compile Include="Entities\Ingame\Continent.cs" />
-    <Compile Include="Entities\Ingame\Nation.cs" />
-    <Compile Include="Entities\Ingame\PlayerStats.cs" />
-    <Compile Include="Entities\Ingame\Team.cs" />
-    <Compile Include="Entities\Ingame\Injury.cs" />
-    <Compile Include="Entities\Ingame\PersonAttributes.cs" />
-    <Compile Include="Entities\Ingame\Contract.cs" />
-    <Compile Include="Entities\Ingame\ContractClauses.cs" />
-    <Compile Include="Entities\Ingame\ContractBonus.cs" />
-    <Compile Include="Entities\Ingame\Persons\Player.cs" />
-    <Compile Include="Entities\Ingame\Persons\PlayerStaff.cs" />
-    <Compile Include="Entities\Ingame\Persons\Staff.cs" />
-    <Compile Include="Entities\Ingame\Person.cs" />
-    <Compile Include="Entities\Ingame\Sub-Entities\NationTaxRule.cs" />
-    <Compile Include="Entities\Ingame\Sub-Entities\RivalNation.cs" />
-    <Compile Include="Entities\Ingame\Interfaces\ICity.cs" />
-    <Compile Include="Entities\Ingame\Interfaces\IClub.cs" />
-    <Compile Include="Entities\Ingame\Interfaces\IClubFinances.cs" />
-    <Compile Include="Entities\Ingame\Interfaces\IContract.cs" />
-    <Compile Include="Entities\Ingame\Interfaces\IContractBonus.cs" />
-    <Compile Include="Entities\Ingame\Interfaces\IContractClause.cs" />
-    <Compile Include="Entities\Ingame\Interfaces\IPerson.cs" />
-    <Compile Include="Entities\Ingame\Interfaces\IContinent.cs" />
-    <Compile Include="Entities\Ingame\Interfaces\IPlayerStaff.cs" />
-    <Compile Include="Entities\Ingame\Interfaces\IPlayer.cs" />
-    <Compile Include="Entities\Ingame\Interfaces\IStaff.cs" />
-    <Compile Include="Entities\Ingame\Interfaces\IInjury.cs" />
-    <Compile Include="Entities\Ingame\Interfaces\INation.cs" />
-    <Compile Include="Entities\Ingame\Interfaces\INationTaxRule.cs" />
-    <Compile Include="Entities\Ingame\Interfaces\IPersonAttributes.cs" />
-    <Compile Include="Entities\Ingame\Interfaces\IPlayerStats.cs" />
-    <Compile Include="Entities\Ingame\Interfaces\IRivalNation.cs" />
-    <Compile Include="Entities\Ingame\Interfaces\ITeam.cs" />
-    <Compile Include="Utilities\BitwiseOperations.cs" />
-    <Compile Include="VirtualMemory\ProcessMemoryAPI.cs" />
-    <Compile Include="VirtualMemory\Managers\GameManager.cs" />
-    <Compile Include="VirtualMemory\Managers\ObjectManager.cs" />
-    <Compile Include="VirtualMemory\Managers\ProcessManager.cs" />
-    <Compile Include="VirtualMemory\Managers\PropertyInvoker.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="FMScoutFramework.csproj" />
     <None Include="FMScoutFramework.sln" />
     <None Include="README.md" />
     <None Include="app.config" />
     <None Include="VirtualMemory\ExternalSharedLibraries\libprocessmemoryapi.dylib" />
   </ItemGroup>
-  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+
 </Project>
